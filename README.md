@@ -2,7 +2,7 @@
 
 **Marc Hadley**
 
-JAX-RS 1.0 Specification Lead
+*JAX-RS 1.0 Specification Lead*
 
 
 REST is an architectural style that defines a set of constraints that, when applied to the architecture of a distributed system, induce desirable properties like loose coupling and horizontal scalability. RESTful web services are the result of applying these constraints to services that utilize web standards such as URIs, HTTP, XML, and JSON. Such services become part of the fabric of the Web and can take advantage of years of web engineering to satisfy their clients’ needs.
