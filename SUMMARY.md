@@ -1,6 +1,6 @@
 # Table of Contents
 
 * [Foreword](README.md)
-* [Preface]()
-    * [Author’s Note](part1/writing.md)
-    * [Who Should Read This Book](part1/writing.md)
+* [Preface](preface/README.md)
+    * [Author’s Note](preface/authors-note.md)
+    * [Who Should Read This Book](preface/who-should-read-this-book.md)
