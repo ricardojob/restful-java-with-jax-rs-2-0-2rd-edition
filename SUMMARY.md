@@ -57,8 +57,11 @@
    * [JAX-RS and Conneg](part1/chapter9/jax_rs_and_conneg.md)
    * [Leveraging Content Negotiation](part1/chapter9/leveraging_content_negotiation.md)
    * [Wrapping Up](part1/chapter9/wrapping_up.md)
-
-
+* [HATEOAS](part1/chapter10/hateoas.md)
+   * [HATEOAS and Web Services](part1/chapter10/hateoas_and_web_services.md)
+   * [HATEOAS and JAX-RS](part1/chapter10/hateoas_and_jax_rs.md)
+   * [Building Links and Link Headers](part1/chapter10/building_links_and_link_headers.md)
+   * [Wrapping Up](part1/chapter10/wrapping_up.md)
 
 
 
