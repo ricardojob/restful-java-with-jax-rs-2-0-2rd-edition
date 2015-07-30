@@ -64,7 +64,7 @@ In vanilla JAX-RS, services can either be singletons or per-request objects. A *
 For our example, we will write a **CustomerResource** class to implement our JAX-RS service and assume it will be a singleton. In this example, we need **CustomerResource** to be a singleton because it is going to hold state. It is going to keep a map of **Customer** objects in memory that our remote clients can access. In a real system, **CustomerResource** would probably interact with a database to retrieve and store customers and wouldn’t need to hold state between requests. In this database scenario, we could make **CustomerResource** per-request and thus stateless. Let’s start by looking at the first few lines of our class to see how to start writing a JAX-RS service:
 
 
-```
+```Java
 package com.restfully.shop.services;
 
 import ...;
