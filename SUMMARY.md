@@ -128,4 +128,11 @@
 * [Examples for Chapter 12](part2/chapter26/examples_for_chapter_12.md)
    * [Example ex12_1 : ContainerResponseFilter and DynamicFeature](part2/chapter26/example_ex12_1_container_response_filter_and_dynamic_feature.md)
    * [Example ex12_2: Implementing a WriterInterceptor](part2/chapter26/example_ex12_2_implementing_a_writer_interceptor.md)
-
+* [Examples for Chapter 13](part2/chapter27/examples_for_chapter_13.md)
+   * [Example ex13_1: Chat REST Interface](part2/chapter27/example_ex13_1_chat_rest_interface.md)
+* [Examples for Chapter 14](part2/chapter28/examples_for_chapter_14.md)
+   * [Example ex14_1: EJB and JAX-RS](part2/chapter28/example_ex14_1_ejb_and_jax_rs.md)
+   * [Example ex14_2: Spring and JAX-RS](part2/chapter28/example_ex14_2_spring_and_jax_rs.md)
+* [Examples for Chapter 15](part2/chapter29/examples_for_chapter_15.md)
+   * [Example ex15_1: Custom Security](part2/chapter29/example_ex15_1_custom_security.md)
+   * [Example ex15_1: JSON Web Encryption](part2/chapter29/example_ex15_1_json_web_encryption.md)
