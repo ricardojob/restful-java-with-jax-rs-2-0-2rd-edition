@@ -54,3 +54,55 @@ Using a unique URI to identify each of your services makes each of your resource
         <product>http://products.myintranet.com/products/111</product>
 ...
 ```
+
+In this example, an XML document describes an ecommerce order entry. We can reference data provided by different divisions in a company. From this reference, we can not only obtain information about the linked customer and products that were bought, but we also have the identifier of the service this data comes from. We know exactly where we can further interact and manipulate this data if we so desired.
+
+
+### The Uniform, Constrained Interface
+
+
+The REST principle of a constrained interface is perhaps the hardest pill for an experienced CORBA or SOAP developer to swallow. The idea behind it is that you stick to the finite set of operations of the application protocol you’re distributing your services upon. This means that you don’t have an “action” parameter in your URI and use only the methods of HTTP for your web services. HTTP has a small, fixed set of operational methods. Each method has a specific purpose and meaning. Let’s review them:
+
+* GET
+
+    GET is a read-only operation. It is used to query the server for specific information. It is both an idempotent and safe operation. Idempotent means that no matter how many times you apply the operation, the result is always the same. The act of reading an HTML document shouldn’t change the document. Safe means that invoking a GET does not change the state of the server at all. This means that, other than request load, the operation will not affect the server.
+
+* PUT
+
+    PUT requests that the server store the message body sent with the request under the location provided in the HTTP message. It is usually modeled as an insert or update. It is also idempotent. When using PUT, the client knows the identity of the resource it is creating or updating. It is idempotent because sending the same PUT message more than once has no effect on the underlying service. An analogy is an MS Word document that you are editing. No matter how many times you click the Save button, the file that stores your document will logically be the same document. 
+
+* DELETE
+
+    DELETE is used to remove resources. It is idempotent as well.
+
+* POST
+
+    POST is the only nonidempotent and unsafe operation of HTTP. Each POST method is allowed to modify the service in a unique way. You may or may not send information with the request. You may or may not receive information from the response. 
+
+* HEAD
+
+    HEAD is exactly like GET except that instead of returning a response body, it returns only a response code and any headers associated with the request. 
+
+* OPTIONS
+
+    OPTIONS is used to request information about the communication options of the resource you are interested in. It allows the client to determine the capabilities of a server and a resource without triggering any resource action or retrieval.
+
+
+There are other HTTP methods (like TRACE and CONNECT), but they are unimportant when you are designing and implementing RESTful web services.
+
+
+You may be scratching your head and thinking, “How is it possible to write a distributed service with only four to six methods?” Well…SQL only has four operations: SELECT, INSERT, UPDATE, and DELETE. JMS and other message-oriented middleware (MOM) really only have two logical operations: send and receive. How powerful are these tools? For both SQL and JMS, the complexity of the interaction is confined purely to the data model. The addressability and operations are well defined and finite, and the hard stuff is delegated to the data model (in the case of SQL) or the message body (in the case of JMS).
+
+
+### Why Is the Uniform Interface Important?
+
+Constraining the interface for your web services has many more advantages than disadvantages. Let’s look at a few:
+
+* Familiarity 
+
+    If you have a URI that points to a service, you know exactly which methods are available on that resource. You don’t need an IDL-like file describing which methods are available. You don’t need stubs. All you need is an HTTP client library. If you have a document that is composed of links to data provided by many different services, you already know which method to call to pull in data from those links.
+
+* Interoperability
+
+    HTTP is a very ubiquitous protocol. Most programming languages have an HTTP client library available to them. So, if your web service is exposed over HTTP, there is a very high probability that people who want to use your service will be able to do so without any additional requirements beyond being able to exchange the data formats the service is expecting. With CORBA or SOAP, you have to install vendor-specific client libraries as well as loads and loads of IDL- or WSDL-generated stub code. How many of you have had a problem getting CORBA or WS-\* vendors to interoperate? It has traditionally been very problematic. The WS-* set of specifications has also been a moving target over the years. So with WS-* and CORBA, you not only have to worry about vendor interoperability, but you also have to make sure that your client and server are using the same specification version of the protocol. With REST over HTTP, you don’t have to worry about either of these things and can just focus on understanding the data format of the service. I like to think that you are focusing on what is really important: *application interoperability*, rather than *vendor interoperability*.
+    
