@@ -24,3 +24,33 @@ In the REST world, addressability is managed through the use of URIs. When you m
 ```
 scheme://host:port/path?queryString#fragment
 ```
+
+
+The **scheme** is the protocol you are using to communicate with. For RESTful web services, it is usually **http** or **https**. The **host** is a DNS name or IP address. It is followed by an optional **port**, which is numeric. The **host** and **port** represent the location of your resource on the network. Following **host** and **port** is a **path** expression. This **path** expression is a set of text segments delimited by the “/” character. Think of the **path** expression as a directory list of a file on your machine. Following the path expression is an optional query string. The “?” character separates the path from the query string. The query string is a list of parameters represented as name/value pairs. Each pair is delimited with the “&” character. Here’s an example query string within a URI:
+
+```
+http://example.com/customers?lastName=Burke&zipcode=02115
+```
+
+
+A specific parameter name can be repeated in the query string. In this case, there are multiple values for the same parameter.
+
+
+The last part of the URI is the fragment. It is delimited by a “#” character. The fragment is usually used to point to a certain place in the document you are querying.
+
+
+Not all characters are allowed within a URI string. Some characters must be encoded using the following rules. The characters a–z, A–Z, 0–9, ., -, *, and _ remain the same. The space character is converted to +. The other characters are first converted into a sequence of bytes using a specific encoding scheme. Next, a two-digit hexadecimal number prefixed by % represents each byte.
+
+
+Using a unique URI to identify each of your services makes each of your resources linkable. Service references can be embedded in documents or even email messages. For instance, consider the situation where somebody calls your company’s help desk with a problem related to your SOA application. A link could represent the exact problem the user is having. Customer support can email the link to a developer who can fix the problem. The developer can reproduce the problem by clicking on the link. Furthermore, the data that services publish can also be composed into larger data streams fairly easily:
+
+
+```
+<order id="111">
+   <customer>http://customers.myintranet.com/customers/32133</customer>
+   <order-entries>
+     <order-entry>
+        <quantity>5</quantity>
+        <product>http://products.myintranet.com/products/111</product>
+...
+```
