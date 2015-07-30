@@ -237,5 +237,5 @@ When first querying for a list of products, clients don’t have to know they’
 
 In this case, there is the additional state transition of **previous** so that clients can browse an earlier part of the product list. The **next** and **previous** links seem a bit trivial, but imagine if we had other transition types like **payment**, **inventory**, or **sales**.
 
-This sort of approach gives the server a lot of flexibility, as it can change where and how state transitions happen on the fly. It could provide new and interesting opportunities to surf to. In [Chapter 10](part1/chapter10/hateoas.md), we’ll dive into HATEOAS again.
+This sort of approach gives the server a lot of flexibility, as it can change where and how state transitions happen on the fly. It could provide new and interesting opportunities to surf to. In [Chapter 10](/part1/chapter10/hateoas.md), we’ll dive into HATEOAS again.
 
