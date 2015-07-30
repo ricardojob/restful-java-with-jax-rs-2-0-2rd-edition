@@ -21,7 +21,7 @@ Your browser would send this request if you wanted to look at [http://jboss.org/
 
 The response message from the server is very similar. It contains the version of HTTP we are using, a response code, a short message that explains the response code, a variable set of optional headers, and an optional message body. Here’s the message the server might respond with using the previous GET query:
 
-```shell
+```html
 HTTP/1.1 200 OK
 X-Powered-By: Servlet 2.4; JBoss-4.2.2.GA
 Content-Type: text/html
