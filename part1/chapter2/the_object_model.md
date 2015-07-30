@@ -7,5 +7,5 @@ The object model of our order entry system is very simple. Each order in the sys
 
 Based on this description of our system, we can deduce that the objects in our model are **Order**, **Customer**, **LineItem**, and **Product**. Each data object in our model has a unique identifier, which is the integer id property. Figure 2-1 shows a UML diagram of our object model.
 
-![Figure 2-1](Figure 2-1.png "Order entry system object model")
+![Figure 2-1](Figure 2-1.png "Figure 2-1. Order entry system object model")
 
