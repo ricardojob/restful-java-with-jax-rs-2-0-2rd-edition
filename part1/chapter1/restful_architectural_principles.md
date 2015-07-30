@@ -7,7 +7,7 @@ Roy Fielding’s PhD thesis describing REST was really an explanation of why the
 The idea of SOA is that application developers design their systems as a set of reusable, decoupled, distributed services. Since these services are published on the network, conceptually, it should be easier to compose larger and more complex systems. SOA has been around for a long time. Developers have used technologies like DCE, CORBA, and Java RMI to build them in the past. Nowadays, though, when you think of SOA, you think of SOAP-based web services.
 
 
-While REST has many similarities to the more traditional ways of writing SOA applications, it is very different in many important ways. You would think that a background in distributed computing would be an asset to understanding this new way of creating web services, but unfortunately this is not always the case. The reason is that some of the concepts of REST are hard to swallow, especially if you have written successful SOAP or CORBA applications. If your career has a foundation in one of these older technologies, there’s a bit of emotional baggage you will have to overcome. For me, it took a few months of reading, researching, and intense arguing with REST evangelists (aka RESTafarians). For you, it may be easier. Others will never pick REST over something like SOAP and WS-*.
+While REST has many similarities to the more traditional ways of writing SOA applications, it is very different in many important ways. You would think that a background in distributed computing would be an asset to understanding this new way of creating web services, but unfortunately this is not always the case. The reason is that some of the concepts of REST are hard to swallow, especially if you have written successful SOAP or CORBA applications. If your career has a foundation in one of these older technologies, there’s a bit of emotional baggage you will have to overcome. For me, it took a few months of reading, researching, and intense arguing with REST evangelists (aka RESTafarians). For you, it may be easier. Others will never pick REST over something like SOAP and WS-\*.
 
 
 Let’s examine each of the architectural principles of REST in detail and why they are important when you are writing a web service.
@@ -36,10 +36,10 @@ http://example.com/customers?lastName=Burke&zipcode=02115
 A specific parameter name can be repeated in the query string. In this case, there are multiple values for the same parameter.
 
 
-The last part of the URI is the fragment. It is delimited by a “#” character. The fragment is usually used to point to a certain place in the document you are querying.
+The last part of the URI is the **fragment**. It is delimited by a “#” character. The fragment is usually used to point to a certain place in the document you are querying.
 
 
-Not all characters are allowed within a URI string. Some characters must be encoded using the following rules. The characters a–z, A–Z, 0–9, ., -, *, and _ remain the same. The space character is converted to +. The other characters are first converted into a sequence of bytes using a specific encoding scheme. Next, a two-digit hexadecimal number prefixed by % represents each byte.
+Not all characters are allowed within a URI string. Some characters must be encoded using the following rules. The characters a–z, A–Z, 0–9, ., -, \*, and _ remain the same. The space character is converted to +. The other characters are first converted into a sequence of bytes using a specific encoding scheme. Next, a two-digit hexadecimal number prefixed by % represents each byte.
 
 
 Using a unique URI to identify each of your services makes each of your resources linkable. Service references can be embedded in documents or even email messages. For instance, consider the situation where somebody calls your company’s help desk with a problem related to your SOA application. A link could represent the exact problem the user is having. Customer support can email the link to a developer who can fix the problem. The developer can reproduce the problem by clicking on the link. Furthermore, the data that services publish can also be composed into larger data streams fairly easily:
@@ -65,7 +65,7 @@ The REST principle of a constrained interface is perhaps the hardest pill for an
 
 * GET
 
-    GET is a read-only operation. It is used to query the server for specific information. It is both an idempotent and safe operation. Idempotent means that no matter how many times you apply the operation, the result is always the same. The act of reading an HTML document shouldn’t change the document. Safe means that invoking a GET does not change the state of the server at all. This means that, other than request load, the operation will not affect the server.
+    GET is a read-only operation. It is used to query the server for specific information. It is both an *idempotent* and *safe* operation. Idempotent means that no matter how many times you apply the operation, the result is always the same. The act of reading an HTML document shouldn’t change the document. Safe means that invoking a GET does not change the state of the server at all. This means that, other than request load, the operation will not affect the server.
 
 * PUT
 
@@ -91,7 +91,7 @@ The REST principle of a constrained interface is perhaps the hardest pill for an
 There are other HTTP methods (like TRACE and CONNECT), but they are unimportant when you are designing and implementing RESTful web services.
 
 
-You may be scratching your head and thinking, “How is it possible to write a distributed service with only four to six methods?” Well…SQL only has four operations: SELECT, INSERT, UPDATE, and DELETE. JMS and other message-oriented middleware (MOM) really only have two logical operations: send and receive. How powerful are these tools? For both SQL and JMS, the complexity of the interaction is confined purely to the data model. The addressability and operations are well defined and finite, and the hard stuff is delegated to the data model (in the case of SQL) or the message body (in the case of JMS).
+You may be scratching your head and thinking, “How is it possible to write a distributed service with only four to six methods?” Well…SQL only has four operations: SELECT, INSERT, UPDATE, and DELETE. JMS and other message-oriented middleware (MOM) really only have two logical operations: *send* and *receive*. How powerful are these tools? For both SQL and JMS, the complexity of the interaction is confined purely to the data model. The addressability and operations are well defined and finite, and the hard stuff is delegated to the data model (in the case of SQL) or the message body (in the case of JMS).
 
 
 ### Why Is the Uniform Interface Important?
@@ -132,7 +132,7 @@ With HTTP, the representation is the message body of your request or response. A
 type/subtype;name=value;name=value...
 ```
 
-**type** is the main format family and subtype is a category. Optionally, the MIME type can have a set of name/value pair properties delimited by the “;” character. Some examples are:
+**type** is the main format family and **subtype** is a category. Optionally, the MIME type can have a set of name/value pair properties delimited by the “;” character. Some examples are:
 
 ```shell
 text/plain
