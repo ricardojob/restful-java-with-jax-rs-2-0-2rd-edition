@@ -84,4 +84,20 @@ As you can see, **CustomerResource** is a plain Java class and doesn’t impleme
 In our class, we define a simple map in the **customerDB** field that will store created **Customer** objects in memory. We use a **java.util.concurrent.ConcurrentHashMap** for **customerDB** because **CustomerResource** is a singleton and will have concurrent requests accessing the map. Using a **java.util.HashMap** would trigger concurrent access exceptions in a multithreaded environment. Using a **java.util.Hashtable** creates a synchronization bottleneck. **ConcurrentHashMap** is our best bet. The **idCounter** field will be used to generate IDs for newly created **Customer** objects. For concurrency reasons, we use a **java.util.concurrent.atomic.AtomicInteger**, as we want to always have a unique number generated. Of course, these two lines of code have nothing to do with JAX-RS and are solely artifacts required by our simple example.
 
 
+#### Creating customers
+
+Let’s now take a look at how to create customers in our **CustomerResource** class:
+
+```Java
+   @POST
+   @Consumes("application/xml")
+   public Response createCustomer(InputStream is) {
+      Customer customer = readCustomer(is);
+      customer.setId(idCounter.incrementAndGet());
+      customerDB.put(customer.getId(), customer);
+      System.out.println("Created customer " + customer.getId());
+      return Response.created(URI.create("/customers/"
+                                   + customer.getId())).build();
+   }
+```
 
