@@ -27,5 +27,5 @@ The link[^2] element tells any client that obtains an XML document describing on
 
 
 
-
+---
 [^2]  I actually borrowed the link element from the Atom format. Atom is a syndication format that is used to aggregate and publish blogs and news feeds. You can find out more about Atom at http://www.w3.org/2005/Atom.
