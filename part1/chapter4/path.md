@@ -177,6 +177,11 @@ The URI specification only allows certain characters within a URI string. It als
 * These characters are allowed but are reserved for URI syntax: **,;:$&+=?/\\\[\]@**. 
 
 
+All other characters must be encoded using the “%” character followed by a two-digit hexadecimal number. This hexadecimal number corresponds to the equivalent hexadecimal character in the ASCII table. So, the string **bill&burke** would be encoded as **bill_burke**.
+
+
+
+
 
 
 
