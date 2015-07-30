@@ -17,6 +17,37 @@ To receive a request, a Java method must have at least an HTTP method annotation
 
 
 
+```Java
+@Path("/orders")
+public class OrderResource {
+   @GET
+   public String getAllOrders() {
+       ...
+   }
+}
+```
+
+
+An HTTP request of **GET /orders** would dispatch to the **getAllOrders()** method.
+
+
+You can also apply **@Path** to your Java method. If you do this, the URI matching pattern is a concatenation of the class’s **@Path** expression and that of the method’s. For example:
+
+```Java
+@Path("/orders")
+public class OrderResource {
+
+   @GET
+   @Path("unpaid")
+   public String getUnpaidOrders() {
+      ...
+   }
+}
+```
+
+So, the URI pattern for **getUnpaidOrders()** would be the relative URI **/orders/unpaid**.
+
+
 
 
 
