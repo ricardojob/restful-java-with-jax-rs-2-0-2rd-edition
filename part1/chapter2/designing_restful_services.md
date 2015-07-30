@@ -1,0 +1,7 @@
+# Chapter 2. Designing RESTful Services
+
+
+In [Chapter 1](../chapter1/introduction_to_rest.md), I gave you a brief overview of REST and how it relates to HTTP. Although it is good to obtain a solid foundation in theory, nothing can take the place of seeing theory put into practice. So, let’s define a RESTful interface for a simple order entry system of a hypothetical ecommerce web store. Remote distributed clients will use this web service to purchase goods, modify existing orders in the system, and view information about customers and products.
+
+
+In this chapter, we will start off by examining the simple underlying object model of our service. After walking through the model, we will add a distributed interface to our system using HTTP and the architectural guidelines of REST. To satisfy the addressability requirements of REST, we will first have to define a set of URIs that represent the entry points into our system. Since RESTful systems are representation-oriented, we will next define the data format that we will use to exchange information between our services and clients. Finally, we will decide which HTTP methods are allowed by each exposed URI and what those methods do. We will make sure to conform to the uniform, constrained interface of HTTP when doing this step.
