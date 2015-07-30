@@ -83,3 +83,32 @@ Content-Type: application/xml
 ```
 
 The response code is 200, “OK,” indicating that the request was successful. The **Content-Type** header specifies the format of our message body as XML, and finally we have the actual representation of the **Order**.
+
+
+
+### Creating an Order, Customer, or Product
+
+There are two possible ways in which a client could create an **Order**, **Customer**, or **Product** within our order entry system: by using either the HTTP PUT or POST method. Let’s look at both ways.
+
+
+#### Creating with PUT
+
+The HTTP definition of PUT states that it can be used to create or update a resource on the server. To create an **Order**, **Customer**, or **Product** with PUT, the client simply sends a representation of the new object it is creating to the exact URI location that represents the object:
+
+```
+PUT /orders/233 HTTP/1.1
+PUT /customers/112 HTTP/1.1
+PUT /products/664 HTTP/1.1
+```
+
+PUT is required by the specification to send a response code of 201, “Created,” if a new resource was created on the server as a result of the request.
+
+The HTTP specification also states that PUT is idempotent. Our PUT is idempotent, because no matter how many times we tell the server to “create” our **Order**, the same bits are stored at the **/orders/233** location. Sometimes a PUT request will fail and the client won’t know if the request was delivered and processed at the server. Idempotency guarantees that it’s OK for the client to retransmit the PUT operation and not worry about any adverse side effects.
+
+
+The disadvantage of using PUT to create resources is that the client has to provide the unique ID that represents the object it is creating. While it usually possible for the client to generate this unique ID, most application designers prefer that their servers (usually through their databases) create this ID. In our hypothetical order entry system, we want our server to control the generation of resource IDs. So what do we do? We can switch to using POST instead of PUT.
+
+
+#### Creating with POST
+
+Creating an **Order**, **Customer**, or **Product** using the POST method is a little more complex than using PUT. To create an **Order**, **Customer**, or **Product** with POST, the client sends a representation of the new object it is creating to the parent URI of its representation, leaving out the numeric target ID. For example:
