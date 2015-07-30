@@ -7,7 +7,7 @@ For those of us with computers, the World Wide Web is an intricate part of our l
 Really, most of us take the Web for granted. Have you, as a programmer, sat down and tried to understand why the Web has been so successful? How has it grown from a simple network of researchers and academics to an interconnected worldwide community? What properties of the Web make it so viral?
 
 
-One man, Roy Fielding, did ask these questions in his doctoral thesis, “Architectural Styles and the Design of Network-based Software Architectures.” In it, he identifies specific architectural principles that answer the following questions:
+One man, Roy Fielding, did ask these questions in his doctoral thesis, “Architectural Styles and the Design of Network-based Software Architectures.”[^1] In it, he identifies specific architectural principles that answer the following questions:
 
 * Why is the Web so prevalent and ubiquitous? 
 * What makes the Web scale? 
@@ -39,3 +39,8 @@ The set of these architectural principles is called REpresentational State Trans
 
 
 For a PhD thesis, Fielding’s paper is actually very readable and, thankfully, not very long. It, along with Leonard Richardson and Sam Ruby’s book RESTful Web APIs (O’Reilly), is an excellent reference for understanding REST. I will give a much briefer introduction to REST and the Internet protocol it uses (HTTP) within this chapter.
+
+
+
+---
+[^1] [Architectural Styles and the Design of Network-based Software Architectures](http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm)
