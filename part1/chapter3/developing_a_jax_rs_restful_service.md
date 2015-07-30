@@ -203,9 +203,236 @@ The **updateCustomer()** method takes two parameters. The first is an **id** par
 In the first part of the method implementation, we read in the XML document and create a **Customer** object out of it. The method then tries to find an existing **Customer** object in the **customerDB** map. If it doesn’t exist, we throw a **WebApplicationException** that will send a 404, “Not Found,” response code back to the client. If the **Customer** object does exist, we update our existing **Customer** object with new updated values.
 
 
+#### Utility methods
 
 
+The final thing we have to implement is the utility methods that were used in **createCustomer()**, **getCustomer()**, and **updateCustomer()** to transform **Customer** objects to and from XML. The **outputCustomer()** method takes a **Customer** object and writes it as XML to the response’s **OutputStream**:
 
+
+```Java
+   protected void outputCustomer(OutputStream os, Customer cust)
+                                                     throws IOException {
+      PrintStream writer = new PrintStream(os);
+      writer.println("<customer id=\"" + cust.getId() + "\">");
+      writer.println("   <first-name>" + cust.getFirstName()
+                      + "</first-name>");
+      writer.println("   <last-name>" + cust.getLastName()
+                      + "</last-name>");
+      writer.println("   <street>" + cust.getStreet() + "</street>");
+      writer.println("   <city>" + cust.getCity() + "</city>");
+      writer.println("   <state>" + cust.getState() + "</state>");
+      writer.println("   <zip>" + cust.getZip() + "</zip>");
+      writer.println("   <country>" + cust.getCountry() + "</country>");
+      writer.println("</customer>");
+   }
+```
+
+As you can see, this is a pretty straightforward method. Through string manipulations, it does a brute-force conversion of the **Customer** object to XML text.
+
+
+The next method is **readCustomer()**. The method is responsible for reading XML text from an **InputStream** and creating a **Customer** object:
+
+
+```Java
+   protected Customer readCustomer(InputStream is) {
+      try {
+         DocumentBuilder builder =
+            DocumentBuilderFactory.newInstance().newDocumentBuilder();
+         Document doc = builder.parse(is);
+         Element root = doc.getDocumentElement();
+```
+
+
+Unlike **outputCustomer()**, we don’t manually parse the **InputStream**. The JDK has a built-in XML parser, so we do not need to write it ourselves or download a third-party library to do it. The **readCustomer()** method starts off by parsing the **InputStream** and creating a Java object model that represents the XML document. The rest of the **readCustomer()** method moves data from the XML model into a newly created **Customer** object:
+
+```Java
+         Customer cust = new Customer();
+         if (root.getAttribute("id") != null
+                && !root.getAttribute("id").trim().equals("")) {
+            cust.setId(Integer.valueOf(root.getAttribute("id")));
+         }
+         NodeList nodes = root.getChildNodes();
+         for (int i = 0; i < nodes.getLength(); i++) {
+            Element element = (Element) nodes.item(i);
+            if (element.getTagName().equals("first-name")) {
+               cust.setFirstName(element.getTextContent());
+            }
+            else if (element.getTagName().equals("last-name")) {
+               cust.setLastName(element.getTextContent());
+            }
+            else if (element.getTagName().equals("street")) {
+               cust.setStreet(element.getTextContent());
+            }
+            else if (element.getTagName().equals("city")) {
+               cust.setCity(element.getTextContent());
+            }
+            else if (element.getTagName().equals("state")) {
+               cust.setState(element.getTextContent());
+            }
+            else if (element.getTagName().equals("zip")) {
+               cust.setZip(element.getTextContent());
+            }
+            else if (element.getTagName().equals("country")) {
+               cust.setCountry(element.getTextContent());
+            }
+         }
+         return cust;
+      }
+      catch (Exception e) {
+         throw new WebApplicationException(e,
+                       Response.Status.BAD_REQUEST);
+      }
+   }
+}
+```
+
+
+I’ll admit, this example was a bit contrived. In a real system, we would not manually output XML or write all this boilerplate code to read in an XML document and convert it to a business object, but I don’t want to distract you from learning JAX-RS basics by introducing another API. In [Chapter 6](../chapter6/jax_rs_content_handlers.md), I will show how you can use JAXB to map your Customer object to XML and have JAX-RS automatically transform your HTTP message body to and from XML.
+
+
+### JAX-RS and Java Interfaces
+
+
+In our example so far, we’ve applied JAX-RS annotations directly on the Java class that implements our service. In JAX-RS, you are also allowed to define a Java interface that contains all your JAX-RS annotation metadata instead of applying all your annotations to your implementation class.
+
+
+Interfaces are a great way to scope out how you want to model your services. With an interface, you can write something that defines what your RESTful API will look like along with what Java methods they will map to before you write a single line of business logic. Also, many developers like to use this approach so that their business logic isn’t “polluted” with so many annotations. They think the code is more readable if it has fewer annotations. Finally, sometimes you do have the case where the same business logic must be exposed not only RESTfully, but also through SOAP and JAX-WS. In this case, your business logic would look more like an explosion of annotations than actual code. Interfaces are a great way to isolate all this metadata into one logical and readable construct.
+
+
+Let’s transform our customer resource example into something that is interface based:
+
+```Java
+package com.restfully.shop.services;
+
+import ...;
+
+@Path("/customers")
+public interface CustomerResource {
+
+   @POST
+   @Consumes("application/xml")
+   public Response createCustomer(InputStream is);
+
+   @GET
+   @Path("{id}")
+   @Produces("application/xml")
+   public StreamingOutput getCustomer(@PathParam("id") int id);
+
+   @PUT
+   @Path("{id}")
+   @Consumes("application/xml")
+   public void updateCustomer(@PathParam("id") int id, InputStream is);
+}
+```
+
+Here, our **CustomerResource** is defined as an interface and all the JAX-RS annotations are applied to methods within that interface. We can then define a class that implements this interface:
+
+
+```Java
+package com.restfully.shop.services;
+
+import ...;
+
+public class CustomerResourceService implements CustomerResource {
+
+   public Response createCustomer(InputStream is) {
+      ... the implementation ...
+   }
+
+   public StreamingOutput getCustomer(int id)
+      ... the implementation ...
+   }
+
+   public void updateCustomer(int id, InputStream is) {
+      ... the implementation ...
+}
+```
+
+
+As you can see, no JAX-RS annotations are needed within the implementing class. All our metadata is confined to the **CustomerResource** interface.
+
+
+If you need to, you can override the metadata defined in your interfaces by reapplying annotations within your implementation class. For example, maybe we want to enforce a specific character set for POST XML:
+
+```Java
+public class CustomerResourceService implements CustomerResource {
+
+   @POST
+   @Consumes("application/xml;charset=utf-8")
+   public Response createCustomer(InputStream is) {
+      ... the implementation ...
+   }
+```
+
+
+In this example, we are overriding the metadata defined in an interface for one specific method. When overriding metadata for a method, you must respecify all the annotation metadata for that method even if you are changing only one small thing.
+
+
+Overall, I do not recommend that you do this sort of thing. The whole point of using an interface to apply your JAX-RS metadata is to isolate the information and define it in one place. If your annotations are scattered about between your implementation class and interface, your code becomes a lot harder to read and understand.
+
+
+### Inheritance
+
+The JAX-RS specification also allows you to define class and interface hierarchies if you so desire. For example, let’s say we wanted to make our **outputCustomer()** and **readCustomer()** methods abstract so that different implementations could transform XML how they wanted:
+
+
+```Java
+package com.restfully.shop.services;
+
+import ...;
+
+public abstract class AbstractCustomerResource {
+
+   @POST
+   @Consumes("application/xml")
+   public Response createCustomer(InputStream is) {
+     ... complete implementation ...
+   }
+
+   @GET
+   @Path("{id}")
+   @Produces("application/xml")
+   public StreamingOutput getCustomer(@PathParam("id") int id) {
+      ... complete implementation
+   }
+   @PUT
+   @Path("{id}")
+   @Consumes("application/xml")
+   public void updateCustomer(@PathParam("id") int id,
+                               InputStream is) {
+      ... complete implementation ...
+   }
+
+   abstract protected void outputCustomer(OutputStream os,
+                                    Customer cust) throws IOException;
+
+   abstract protected Customer readCustomer(InputStream is);
+
+}
+```
+
+You could then extend this abstract class and define the **outputCustomer()** and **readCustomer()** methods:
+
+
+```Java
+package com.restfully.shop.services;
+
+import ...;
+
+@Path("/customers")
+public class CustomerResource extends AbstractCustomerResource {
+
+   protected void outputCustomer(OutputStream os, Customer cust)
+                                                  throws IOException {
+      ... the implementation ...
+   }
+
+   protected Customer readCustomer(InputStream is) {
+      ... the implementation ...
+   }
+```
+
+The only caveat with this approach is that the concrete subclass must annotate itself with the **@Path** annotation to identify it as a service class to the JAX-RS provider.
 
 
 
