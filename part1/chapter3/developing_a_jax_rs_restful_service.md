@@ -111,3 +111,70 @@ The **@javax.ws.rs.Consumes** annotation applied to **createCustomer()** specifi
 
 
 The **createCustomer()** method takes one **java.io.InputStream** parameter. In JAX-RS, any non-JAX-RS-annotated parameter is considered to be a representation of the HTTP input request’s message body. In this case, we want access to the method body in its most basic form, an **InputStream**.
+
+> #### Warning
+> Only one Java method parameter can represent the HTTP message body. This means any other parameters must be annotated with one of the JAX-RS annotations discussed in [Chapter 5](../chapter5/jax_rs_injection.md).
+
+
+The implementation of the method reads and transforms the POSTed XML into a **Customer** object and stores it in the **customerDB** map. The method returns a complex response to the client using the **javax.ws.rs.core.Response** class. The static **Response.created()** method creates a **Response** object that contains an HTTP status code of 201, “Created.” It also adds a **Location** header to the HTTP response with the value of something like *http://shop.restfully.com/customers/333*, depending on the base URI of the server and the generated ID of the **Customer** object (333 in this example).
+
+
+#### Retrieving customers
+
+
+```Java
+   @GET
+   @Path("{id}")
+   @Produces("application/xml")
+   public StreamingOutput getCustomer(@PathParam("id") int id) {
+      final Customer customer = customerDB.get(id);
+      if (customer == null) {
+         throw new WebApplicationException(Response.Status.NOT_FOUND);
+      }
+      return new StreamingOutput() {
+         public void write(OutputStream outputStream)
+                       throws IOException, WebApplicationException {
+            outputCustomer(outputStream, customer);
+         }
+      };
+   }
+```
+
+We annotate the **getCustomer()** method with the **@javax.ws.rs.GET** annotation to bind HTTP GET operations to this Java method.
+
+
+We also annotate **getCustomer()** with the **@javax.ws.rs.Produces** annotation. This annotation tells JAX-RS which HTTP **Content-Type** the GET response will be. In this case, it is **application/xml**.
+
+
+In the implementation of the method, we use the **id** parameter to query for a **Customer** object in the customerDB map. If this customer does not exist, we throw the **javax.ws.rs.WebApplicationException**. This exception will set the HTTP response code to 404, “Not Found,” meaning that the customer resource does not exist. We’ll discuss more about exception handling in [Chapter 7](../chapter7/server_responses_and_exception_handling.md), so I won’t go into more detail about the **WebApplicationException** here.
+
+
+We will write the response manually to the client through a **java.io.OutputStream**. In JAX-RS, when you want to do streaming manually, you must implement and return an instance of the **javax.ws.rs.core.StreamingOutput** interface from your JAX-RS method. **StreamingOutput** is a callback interface with one callback method, **write()**:
+
+```Java
+package javax.ws.rs.core;
+
+public interface StreamingOutput {
+   public void write(OutputStream os) throws IOException,
+                                             WebApplicationException;
+}
+```
+
+
+In the last line of our **getCustomer()** method, we implement and return an inner class implementation of **StreamingOutput**. Within the **write()** method of this inner class, we delegate back to a utility method called **outputCustomer()** that exists in our **CustomerResource** class. When the JAX-RS provider is ready to send an HTTP response body back over the network to the client, it will call back to the **write()** method we implemented to output the XML representation of our **Customer** object.
+
+
+In general, you will not use the **StreamingOutput** interface to output responses. In [Chapter 6](../chapter6/jax_rs_content_handlers.md), you will see that JAX-RS has a bunch of nice content handlers that can automatically convert Java objects straight into the data format you are sending across the wire. I didn’t want to introduce too many new concepts in the first introductory chapter, so the example only does simple streaming.
+
+
+#### Updating a customer
+
+
+The last RESTful operation we have to implement is updating customers. In [Chapter 2](../chapter2/designing_restful_services.md), we used **PUT /customers/{id}**, while passing along an updated XML representation of the customer. This is implemented in the **updateCustomer()** method of our **CustomerResource** class:
+
+
+
+
+
+
+
