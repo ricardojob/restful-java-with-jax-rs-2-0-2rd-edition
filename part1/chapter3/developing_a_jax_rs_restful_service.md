@@ -106,3 +106,8 @@ We will implement customer creation using the same model as that used in [Chapte
 
 To bind HTTP POST requests to the **createCustomer()** method, we annotate it with the **@javax.ws.rs.POST** annotation. The **@Path** annotation we put on the **CustomerResource** class, combined with this **@POST** annotation, binds all POST requests going to the relative URI **/customers** to the Java method **createCustomer()**.
 
+
+The **@javax.ws.rs.Consumes** annotation applied to **createCustomer()** specifies which media type the method is expecting in the message body of the HTTP input request. If the client POSTs a media type other than XML, an error code is sent back to the client.
+
+
+The **createCustomer()** method takes one **java.io.InputStream** parameter. In JAX-RS, any non-JAX-RS-annotated parameter is considered to be a representation of the HTTP input request’s message body. In this case, we want access to the method body in its most basic form, an **InputStream**.
