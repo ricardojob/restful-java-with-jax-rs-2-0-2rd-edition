@@ -33,7 +33,11 @@
    * [@BeanParam](part1/chapter5/bean_param.md)
    * [Common Functionality](part1/chapter5/common_functionality.md)
    * [Wrapping Up](part1/chapter5/wrapping_up.md)
-
+* [JAX-RS Content Handlers](part1/chapter6/jax_rs_content_handlers.md)
+   * [Built-in Content Marshalling](part1/chapter6/built_in_content_marshalling.md)
+   * [JAXB](part1/chapter6/jaxb.md)
+   * [Custom Marshalling](part1/chapter6/custom_marshalling.md)
+   * [Wrapping Up](part1/chapter6/wrapping_up.md)
 
 
 
