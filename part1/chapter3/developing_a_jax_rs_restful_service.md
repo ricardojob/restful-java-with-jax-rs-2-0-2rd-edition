@@ -173,6 +173,39 @@ In general, you will not use the **StreamingOutput** interface to output respons
 The last RESTful operation we have to implement is updating customers. In [Chapter 2](../chapter2/designing_restful_services.md), we used **PUT /customers/{id}**, while passing along an updated XML representation of the customer. This is implemented in the **updateCustomer()** method of our **CustomerResource** class:
 
 
+```Java
+   @PUT
+   @Path("{id}")
+   @Consumes("application/xml")
+   public void updateCustomer(@PathParam("id") int id,
+                               InputStream is) {
+      Customer update = readCustomer(is);
+      Customer current = customerDB.get(id);
+      if (current == null)
+        throw new WebApplicationException(Response.Status.NOT_FOUND);
+
+      current.setFirstName(update.getFirstName());
+      current.setLastName(update.getLastName());
+      current.setStreet(update.getStreet());
+      current.setState(update.getState());
+      current.setZip(update.getZip());
+      current.setCountry(update.getCountry());
+   }
+```
+
+
+We annotate the **updateCustomer()** method with **@javax.ws.rs.PUT** to bind HTTP PUT requests to this method. Like our **getCustomer()** method, **updateCustomer()** is annotated with an additional **@Path** annotation so that we can match **/customers/{id}** URIs.
+
+
+The **updateCustomer()** method takes two parameters. The first is an **id** parameter that represents the **Customer** object we are updating. Like **getCustomer()**, we use the **@PathParam** annotation to extract the ID from the incoming request URI. The second parameter is an **InputStream** that will allow us to read in the XML document that was sent with the PUT request. Like **createCustomer()**, a parameter that is not annotated with a JAX-RS annotation is considered a representation of the body of the incoming message.
+
+
+In the first part of the method implementation, we read in the XML document and create a **Customer** object out of it. The method then tries to find an existing **Customer** object in the **customerDB** map. If it doesn’t exist, we throw a **WebApplicationException** that will send a 404, “Not Found,” response code back to the client. If the **Customer** object does exist, we update our existing **Customer** object with new updated values.
+
+
+
+
+
 
 
 
