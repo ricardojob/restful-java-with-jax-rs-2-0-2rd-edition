@@ -16,6 +16,6 @@ In our object model, we will be interacting with **Orders**, **Customers**, and 
 ```
 
 
-> #### NOTE
+> ##### NOTE
 
 > You’ll notice that the nouns in our object model have been represented as URIs. URIs shouldn’t be used as mini-RPC mechanisms and should not identify operations. Instead, you should use a combination of HTTP methods and the data format to model unique operations in your distributed RESTful system.
