@@ -174,7 +174,7 @@ The URI specification only allows certain characters within a URI string. It als
 * The US-ASCII alphabetic characters a–z and A–Z are allowable. 
 * The decimal digit characters 0–9 are allowable. 
 * All these other characters are allowable: **_-!.~'()\***. 
-* These characters are allowed but are reserved for URI syntax: **,;:__cursor__+=?/\[]@**. 
+* These characters are allowed but are reserved for URI syntax: **,;:$&+=?/\\\[\]@**. 
 
 
 
