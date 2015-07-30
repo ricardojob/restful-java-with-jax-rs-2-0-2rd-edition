@@ -23,7 +23,7 @@ Each format for **Order**, **Customer**, and **Product** will have a common XML 
 ```
 
 
-The link[^2] element tells any client that obtains an XML document describing one of the objects in our ecommerce system where on the network the client can interact with that particular resource. The rel attribute tells the client what relationship the link has with the resource the URI points to (contained within the href attribute). The self value just means it is pointing to itself. While not that interesting on its own, link becomes very useful when we aggregate or compose information into one larger XML document.
+The **link**[^2] element tells any client that obtains an XML document describing one of the objects in our ecommerce system where on the network the client can interact with that particular resource. The **rel** attribute tells the client what relationship the link has with the resource the URI points to (contained within the **href** attribute). The self value just means it is pointing to itself. While not that interesting on its own, link becomes very useful when we aggregate or compose information into one larger XML document.
 
 
 
