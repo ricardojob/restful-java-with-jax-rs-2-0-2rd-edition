@@ -38,6 +38,9 @@
    * [JAXB](part1/chapter6/jaxb.md)
    * [Custom Marshalling](part1/chapter6/custom_marshalling.md)
    * [Wrapping Up](part1/chapter6/wrapping_up.md)
-
-
+* [Server Responses and Exception Handling](part1/chapter7/server_responses_and_exception_handling.md)
+   * [Default Response Codes](part1/chapter7/default_response_codes.md)
+   * [Complex Responses](part1/chapter7/complex_responses.md)
+   * [Exception Handling](part1/chapter7/exception_handling.md)
+   * [Wrapping Up](part1/chapter7/wrapping_up.md)
 
