@@ -180,6 +180,57 @@ The URI specification only allows certain characters within a URI string. It als
 All other characters must be encoded using the “%” character followed by a two-digit hexadecimal number. This hexadecimal number corresponds to the equivalent hexadecimal character in the ASCII table. So, the string **bill&burke** would be encoded as **bill_burke**.
 
 
+When creating **@Path** expressions, you may encode its string, but you do not have to. If a character in your **@Path** pattern is an illegal character, the JAX-RS provider will automatically encode the pattern before trying to match and dispatch incoming HTTP requests. If you do have an encoding within your **@Path** expression, the JAX-RS provider will leave it alone and treat it as an encoding when doing its request dispatching. For example:
+
+
+```Java
+@Path("/customers"
+public class CustomerResource {
+
+   @GET
+   @Path("roy&fielding")
+   public String getOurBestCustomer() {
+      ...
+   }
+}
+```
+
+The **@Path** expression for **getOurBestCustomer()** would match incoming requests like **GET /customers/roy%26fielding**.
+
+
+### Matrix Parameters
+
+
+One part of the URI specification that we have not touched on yet is matrix parameters. Matrix parameters are name-value pairs embedded within the path of a URI string. For example:
+
+```
+http://example.cars.com/mercedes/e55;
+color=black/2006
+```
+
+They come after a URI segment and are delimited by the “;” character. The matrix parameter in this example comes after the URI segment **e55**. Its name is **color** and its value is **black**. Matrix parameters are different than query parameters, as they represent attributes of certain segments of the URI and are used for identification purposes. Think of them as adjectives. Query parameters, on the other hand, always come at the end of the URI and always pertain to the full resource you are referencing.
+
+
+
+Matrix parameters are ignored when matching incoming requests to JAX-RS resource methods. It is actually illegal to specify matrix parameters within an **@Path** expression. For example:
+
+
+```Java
+@Path("/mercedes")
+public class MercedesService {
+
+   @GET
+   @Path("/e55/{year}")
+   @Produces("image/jpeg")
+   public Jpeg getE55Picture(@PathParam("year") String year) {
+     ...
+   }
+```
+
+
+If we queried our JAX-RS service with **GET /mercedes/e55;color=black/2006**, the **getE55Picture()** method would match the incoming request and would be invoked. Matrix parameters are not considered part of the matching process because they are usually variable attributes of the request. We’ll see in [Chapter 5](../chapter5/jax_rs_injection.md) how to access matrix parameter information within our JAX-RS resource methods.
+
+
 
 
 
