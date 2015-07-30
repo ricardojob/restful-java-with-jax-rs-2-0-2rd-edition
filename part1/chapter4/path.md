@@ -137,6 +137,50 @@ public class CustomerResource {
 We’ve changed **getCustomer()**’s **@Path** expression to **{id : .+}**. The **.+** is a regular expression that will match any stream of characters after **/customers**. So, the **GET /customers/bill/burke** request would be routed to **getCustomer()**.
 
 
+The **getAddress()** method has a more specific expression. It will map any stream of characters after **/customers** that ends with **/address**. So, the **GET /customers/bill/burke/address** request would be routed to the **getAddress()** method.
+
+
+#### Precedence rules
+
+
+You may have noticed that, together, the **@Path** expressions for **getCustomer()** and **getAddress()** are ambiguous. A **GET /customers/bill/burke/address** request could match either **getCustomer()** or **getAddress()**, depending on which expression was matched first by the JAX-RS provider. The JAX-RS specification has defined strict sorting and precedence rules for matching URI expressions and is based on a *most specific match wins* algorithm. The JAX-RS provider gathers up the set of deployed URI expressions and sorts them based on the following logic:
+
+1. The primary key of the sort is the number of literal characters in the full URI matching pattern. The sort is in descending order. In our ambiguous example, **getCustomer()**’s pattern has 11 literal characters: **/customers/**. The **getAddress()** method’s pattern has 18 literal characters: **/customers/** plus **address**. Therefore, the JAX-RS provider will try to match **getAddress()**’s pattern before **getCustomer()**. 
+2. The secondary key of the sort is the number of template expressions embedded within the pattern—that is, **{id}** or **{id : .+}**. This sort is in descending order. 
+3. The tertiary key of the sort is the number of nondefault template expressions. A default template expression is one that does not define a regular expression—that is, **{id}**. 
+
+
+Let’s look at a list of sorted URI matching expressions and explain why one would match over another:
+
+
+```
+1 /customers/{id}/{name}/address
+2 /customers/{id : .+}/address
+3 /customers/{id}/address
+4 /customers/{id : .+}
+```
+
+
+Expressions 1–3 come first because they all have more literal characters than expression 4. Although expressions 1–3 all have the same number of literal characters, expression 1 comes first because sorting rule #2 is triggered. It has more template expressions than either pattern 2 or 3. Expressions 2 and 3 have the same number of literal characters and same number of template expressions. Expression 2 is sorted ahead of 3 because it triggers sorting rule #3; it has a template pattern that is a regular expression.
+
+
+These sorting rules are not perfect. It is still possible to have ambiguities, but the rules cover 90% of use cases. If your application has URI matching ambiguities, your application design is probably too complicated and you need to revisit and refactor your URI scheme.
+
+
+#### Encoding
+
+The URI specification only allows certain characters within a URI string. It also reserves certain characters for its own specific use. In other words, you cannot use these characters as part of your URI segments. This is the set of allowable and reserved characters:
+
+* The US-ASCII alphabetic characters a–z and A–Z are allowable. 
+* The decimal digit characters 0–9 are allowable. 
+* All these other characters are allowable: **_-!.~'()\***. 
+* These characters are allowed but are reserved for URI syntax: **,;:__cursor__+=?/\[]@**. 
+
+
+
+
+
+
 
 
 
