@@ -10,3 +10,22 @@ Generally, you would define an XML schema for each representation you want to se
 ### Read and Update Format
 
 
+The XML format of our representations will look a tiny bit different when we read or update resources from the server as compared to when we create resources on the server. Let’s look at our read and update format first.
+
+
+#### Common link element
+
+
+Each format for **Order**, **Customer**, and **Product** will have a common XML element called link:
+
+```xml
+<link rel="self" href="http://example.com/..."/>
+```
+
+
+The link[^2] element tells any client that obtains an XML document describing one of the objects in our ecommerce system where on the network the client can interact with that particular resource. The rel attribute tells the client what relationship the link has with the resource the URI points to (contained within the href attribute). The self value just means it is pointing to itself. While not that interesting on its own, link becomes very useful when we aggregate or compose information into one larger XML document.
+
+
+
+
+[^2]  I actually borrowed the link element from the Atom format. Atom is a syndication format that is used to aggregate and publish blogs and news feeds. You can find out more about Atom at http://www.w3.org/2005/Atom.
