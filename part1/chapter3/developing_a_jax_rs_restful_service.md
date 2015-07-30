@@ -101,3 +101,8 @@ Let’s now take a look at how to create customers in our **CustomerResource** c
    }
 ```
 
+We will implement customer creation using the same model as that used in [Chapter 2](../chapter2/designing_restful_services.md). An HTTP POST request sends an XML document representing the customer we want to create. The **createCustomer()** method receives the request, parses the document, creates a **Customer** object from the document, and adds it to our **customerDB** map. The **createCustomer()** method returns a response code of 201, “Created,” along with a Location header pointing to the absolute URI of the customer we just created. So how does the **createCustomer()** method do all this? Let’s examine further.
+
+
+To bind HTTP POST requests to the **createCustomer()** method, we annotate it with the **@javax.ws.rs.POST** annotation. The **@Path** annotation we put on the **CustomerResource** class, combined with this **@POST** annotation, binds all POST requests going to the relative URI **/customers** to the Java method **createCustomer()**.
+
