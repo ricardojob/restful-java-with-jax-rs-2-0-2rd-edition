@@ -5,4 +5,4 @@
     * [Author’s Note](preface/authors-note.md)
     * [Who Should Read This Book](preface/who-should-read-this-book.md)
 * [I. REST and the JAX-RS Standard](part1/README.md)
-    * [1. Introduction to REST](part1/README.md)
+    * [1. Introduction to REST](part1/chapter1/README.md)
