@@ -8,7 +8,7 @@ Let’s start by implementing one of the resources of the order entry system we 
 
 First, we will need a Java class to represent customers in our system. We will name this class **Customer**. **Customer** is a simple Java class that defines eight properties: **id**, **firstName**, **lastName**, **street**, **city**, **state**, **zip**, and **country**. *Properties* are attributes that can be accessed via the class’s fields or through public set and get methods. A Java class that follows this pattern is also called a *Java bean*:
 
-```
+```Java
 package com.restfully.shop.domain;
 
 public class Customer {
@@ -77,6 +77,11 @@ public class CustomerResource {
    private AtomicInteger idCounter = new AtomicInteger();
 ```
 
+
+As you can see, **CustomerResource** is a plain Java class and doesn’t implement any particular JAX-RS interface. The **@javax.ws.rs.Path** annotation placed on the **CustomerResource** class designates the class as a JAX-RS service. Java classes that you want to be recognized as JAX-RS services must have this annotation. Also notice that the **@Path** annotation has the value of **/customers**. This value represents the relative root URI of our customer service. If the absolute base URI of our server is *http://shop.restfully.com*, methods exposed by our **CustomerResource** class would be available under *http://shop.restfully.com/customers*.
+
+
+In our class, we define a simple map in the **customerDB** field that will store created **Customer** objects in memory. We use a **java.util.concurrent.ConcurrentHashMap** for **customerDB** because **CustomerResource** is a singleton and will have concurrent requests accessing the map. Using a **java.util.HashMap** would trigger concurrent access exceptions in a multithreaded environment. Using a **java.util.Hashtable** creates a synchronization bottleneck. **ConcurrentHashMap** is our best bet. The **idCounter** field will be used to generate IDs for newly created **Customer** objects. For concurrency reasons, we use a **java.util.concurrent.atomic.AtomicInteger**, as we want to always have a unique number generated. Of course, these two lines of code have nothing to do with JAX-RS and are solely artifacts required by our simple example.
 
 
 
