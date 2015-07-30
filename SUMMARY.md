@@ -75,16 +75,19 @@
    * [Per-JAX-RS Method Bindings](part1/chapter12/per_jax_rs_method_bindings.md)
    * [Exception Processing](part1/chapter12/exception_processing.md)
    * [Wrapping Up](part1/chapter12/wrapping_up.md)
+
 * [Asynchronous JAX-RS](part1/chapter13/asynchronous_jax_rs.md)
    * [AsyncInvoker Client API](part1/chapter13/async_invoker_client_api.md)
    * [Server Asynchronous Response Processing](part1/chapter13/server_asynchronous_response_processing.md)
    * [Wrapping Up](part1/chapter13/wrapping_up.md)
+
 * [Deployment and Integration](part1/chapter14/deployment_and_integration.md)
    * [Deployment](part1/chapter14/deployment.md)
    * [Configuration](part1/chapter14/configuration.md)
    * [EJB Integration](part1/chapter14/ejb_integration.md)
    * [Spring Integration](part1/chapter14/spring_integration.md)
    * [Wrapping Up](part1/chapter14/wrapping_up.md)
+
 * [Securing JAX-RS](part1/chapter15/securing_jax_rs.md)
    * [Authentication](part1/chapter15/authentication.md)
    * [Authorization](part1/chapter15/authorization.md)
@@ -94,21 +97,43 @@
    * [OAuth 2.0](part1/chapter15/oauth_2_0.md)
    * [Signing and Encrypting Message Bodies](part1/chapter15/signing_and_encrypting_message_bodies.md)
    * [Wrapping Up](part1/chapter15/wrapping_up.md)
+
 * [Alternative Java Clients](part1/chapter16/alternative_java_clients.md)
    * [java.net.URL](part1/chapter16/java_net_URL.md)
    * [Apache HttpClient](part1/chapter16/apache_http_client.md)
    * [RESTEasy Client Proxies](part1/chapter16/resteasy_client_proxies.md)
    * [Wrapping Up](part1/chapter16/wrapping_up.md)
+
 * [Workbook Introduction](part2/chapter17/workbook_introduction.md)
    * [Installing RESTEasy and the Examples](part2/chapter17/installing_resteasy_and_the_examples.md)
    * [Example Requirements and Structure](part2/chapter17/example_requirements_and_structure.md)
+
 * [Examples for Chapter 3](part2/chapter18/examples_for_chapter_3.md)
    * [Build and Run the Example Program](part2/chapter18/build_and_run_the_example_program.md)
    * [Examining the Source Code](part2/chapter18/examining_the_source_code.md)
+
 * [Examples for Chapter 4](part2/chapter19/examples_for_chapter_4.md)
    * [Example ex04_1: HTTP Method Extension](part2/chapter19/example_ex04_1_http_method_extension.md)
    * [Example ex04_2: @Path with Expressions](part2/chapter19/example_ex04_2_path_with_expressions.md)
    * [Example ex04_3: Subresource Locators](part2/chapter19/example_ex04_3_subresource_locators.md)
+
 * [Examples for Chapter 5](part2/chapter20/examples_for_chapter_5.md)
    * [Example ex05_1: Injecting URI Information](part2/chapter20/example_ex05_1_injecting_uri_information.md)
    * [Example ex05_2: Forms and Cookies](part2/chapter20/example_ex05_2_forms_and_cookies.md)
+
+* [Examples for Chapter 6](part2/chapter21/examples_for_chapter_6.md)
+   * [Example ex06_1: Using JAXB](part2/chapter21/example_ex06_1_using_jaxb.md)
+   * [Example ex06_2: Creating a Content Handler](part2/chapter21/example_ex06_2_creating_a_content_handler.md)
+
+* [Examples for Chapter 7](part2/chapter22/examples_for_chapter_7.md)
+   * [Example ex07_1: ExceptionMapper](part2/chapter22/example_ex07_1_exception_mapper.md)
+
+* [Examples for Chapter 9](part2/chapter23/examples_for_chapter_9.md)
+   * [Example ex09_1: Conneg with JAX-RS](part2/chapter23/example_ex09_1_conneg_with_jax_rs.md)
+   * [Example ex09_2: Conneg via URL Patterns](part2/chapter23/example_ex09_2_conneg_via_url_patterns.md)
+
+* [Examples for Chapter 10](part2/chapter24/examples_for_chapter_10.md)
+   * [Example ex10_1: Atom Links](part2/chapter24/example_ex10_1_atom_links.md)
+   * [Example ex10_2: Link Headers](part2/chapter24/example_ex10_2_link_headers.md)
+
+
