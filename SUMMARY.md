@@ -43,4 +43,10 @@
    * [Complex Responses](part1/chapter7/complex_responses.md)
    * [Exception Handling](part1/chapter7/exception_handling.md)
    * [Wrapping Up](part1/chapter7/wrapping_up.md)
-
+* [JAX-RS Client API](part1/chapter8/jax_rs_client_api.md)
+   * [Client Introduction](part1/chapter8/client_introduction.md)
+   * [Bootstrapping with ClientBuilder](part1/chapter8/bootstrapping_with_client_builder.md)
+   * [Client and WebTarget](part1/chapter8/client_and_web_target.md)
+   * [Building and Invoking Requests](part1/chapter8/building_and_invoking_requests.md)
+   * [Configuration Scopes](part1/chapter8/configuration_scopes.md)
+   * [Wrapping Up](part1/chapter8/wrapping_up.md)
