@@ -62,7 +62,16 @@
    * [HATEOAS and JAX-RS](part1/chapter10/hateoas_and_jax_rs.md)
    * [Building Links and Link Headers](part1/chapter10/building_links_and_link_headers.md)
    * [Wrapping Up](part1/chapter10/wrapping_up.md)
-
-
-
-
+* [Scaling JAX-RS Applications](part1/chapter11/scaling_jax_rs_applications.md)
+   * [Caching](part1/chapter11/caching.md)
+   * [Concurrency](part1/chapter11/concurrency.md)
+   * [Wrapping Up](part1/chapter11/wrapping_up.md)
+* [Filters and Interceptors](part1/chapter12/filters_and_interceptors.md)
+   * [Server-Side Filters](part1/chapter12/server_side_filters.md)
+   * [Reader and Writer Interceptors](part1/chapter12/reader_and_writer_interceptors.md)
+   * [Client-Side Filters](part1/chapter12/client_side_filters.md)
+   * [Deploying Filters and Interceptors](part1/chapter12/deploying_filters_and_interceptors.md)
+   * [Ordering Filters and Interceptors](part1/chapter12/ordering_filters_and_interceptors.md)
+   * [Per-JAX-RS Method Bindings](part1/chapter12/per_jax_rs_method_bindings.md)
+   * [Exception Processing](part1/chapter12/exception_processing.md)
+   * [Wrapping Up](part1/chapter12/wrapping_up.md)
