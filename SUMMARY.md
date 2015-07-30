@@ -75,3 +75,10 @@
    * [Per-JAX-RS Method Bindings](part1/chapter12/per_jax_rs_method_bindings.md)
    * [Exception Processing](part1/chapter12/exception_processing.md)
    * [Wrapping Up](part1/chapter12/wrapping_up.md)
+* [Asynchronous JAX-RS](part1/chapter13/asynchronous_jax_rs.md)
+   * [AsyncInvoker Client API](part1/chapter13/async_invoker_client_api.md)
+   * [Server Asynchronous Response Processing](part1/chapter13/server_asynchronous_response_processing.md)
+   * [Wrapping Up](part1/chapter13/wrapping_up.md)
+
+
+
