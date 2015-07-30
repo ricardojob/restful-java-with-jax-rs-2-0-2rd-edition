@@ -9,3 +9,6 @@ Based on this description of our system, we can deduce that the objects in our m
 
 ![Figure 2-1](Figure 2-1.png "Figure 2-1. Order entry system object model")
 
+
+
+We will want to browse all orders as well as each individual order in our system. We will also want to submit new orders and update existing ones. Finally, we will want to have the ability to cancel and delete existing orders. The **OrderEntryService** object represents the operations we want to perform on our **Order**, **Customer**, **LineItem**, and **Product** objects.
