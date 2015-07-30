@@ -50,3 +50,16 @@
    * [Building and Invoking Requests](part1/chapter8/building_and_invoking_requests.md)
    * [Configuration Scopes](part1/chapter8/configuration_scopes.md)
    * [Wrapping Up](part1/chapter8/wrapping_up.md)
+* [HTTP Content Negotiation](part1/chapter9/http_content_negotiation.md)
+   * [Conneg Explained](part1/chapter9/conneg_explained.md)
+   * [Language Negotiation](part1/chapter9/language_negotiation.md)
+   * [Encoding Negotiation](part1/chapter9/encoding_negotiation.md)
+   * [JAX-RS and Conneg](part1/chapter9/jax_rs_and_conneg.md)
+   * [Leveraging Content Negotiation](part1/chapter9/leveraging_content_negotiation.md)
+   * [Wrapping Up](part1/chapter9/wrapping_up.md)
+
+
+
+
+
+
