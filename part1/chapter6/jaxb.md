@@ -289,40 +289,143 @@ As you can see, JSON is a much simpler format than XML. While XML has elements, 
         { "phone" : [ { "$", "978-666-5555"}, { "$", "978-555-2233"} ] }
     }
     ```
+4. XML attributes become JSON properties prefixed with the **@** character. So, if you had the XML: 
+
+    ```xml
+    <customer id="42">
+        <name>Bill Burke</name>
+    </customer>
+    ```
+    
+    the JSON mapping would look like the following:
+    
+    ```
+    { "customer" :
+        { "@id" : 42,
+          "name" : "Bill Burke"
+        }
+    }
+    ```
+5. Active namespaces are contained in an **@xmlns** JSON property of the element. The “$” represents the default namespace. All nested elements and attributes would use the namespace prefix as part of their names. So, if we had the XML: 
+
+    ```xml
+    <customer xmlns="urn:cust" xmlns:address="urn:address">
+        <name>Bill Burke</name>
+        <address:zip>02115</address:zip>
+    </customer>
+    ```
+    
+    the JSON mapping would be the following:
+    
+    ```
+    { "customer" :
+        { "@xmlns" : { "$" : "urn:cust",
+                       "address" : "urn:address" } ,
+          "name" : { "$" : "Bill Burke",
+                     "@xmlns" : { "$" : "urn:cust",
+                              "address" : "urn:address" } },
+          "address:zip" : { "$" : "02115",
+                            "@xmlns" : { "$" : "urn:cust",
+                        "address" : "urn:address" }}
+        }
+    }
+    ```
+
+BadgerFish is kind of unnatural when writing JavaScript, but if you want to unify your formats under XML schema, it’s the way to go.
 
 
+### JSON and JSON Schema
 
 
+The thing with using XML schema and the BadgerFish mapping to define your JSON data structures is that it is very weird for JavaScript programmers to consume. If you do not need to support XML clients or if you want to provide a cleaner and simpler JSON representation, there are some options available for you.
 
 
+It doesn’t make much sense to use XML schema to define JSON data structures. The main reason is that JSON is a richer data format that supports things like maps, lists, and numeric, Boolean, and string data. It is a bit quirky modeling these sorts of simple data structures with XML schema. To solve this problem, the JSON community has come up with JSON schema. Here’s an example of what it looks like when you define a JSON data structure representing our customer example:
 
 
+```
+{
+ "description":"A customer",
+ "type":"object",
+
+ "properties":
+   {"first": {"type": "string"},
+    "last" : {"type" : "string"}
+   }
+}
+```
 
 
+The **description** property defines the description for the schema. The **type** property defines what is being described. Next, you define a list of properties that make up your object. I won’t go into a lot of detail about JSON schema, so you should visit http://www.json-schema.org to get more information on this subject.
 
 
+If you do a Google search on Java and JSON, you’ll find a plethora of frameworks that help you marshal and unmarshal between Java and JSON. One particularly good one is the Jackson[^6] framework. It has a prewritten JAX-RS content handler that can automatically convert Java beans to and from JSON. It can also generate JSON schema documents from a Java object model.
 
 
+The way it works by default is that it introspects your Java class, looking for properties, and maps them into JSON. For example, if we had the Java class:
 
 
+```Java
+public class Customer {
+   private int id;
+   private String firstName;
+   private String lastName;
+
+   public int getId() {
+      return id;
+   }
+
+   public void setId(int id) {
+      this.id = id;
+   }
+
+   public String getFirstName() {
+      return firstName;
+   }
+
+   public void setFirstName(String firstName) {
+      this.firstName = firstName;
+   }
+
+   public String getLastName() {
+      return lastName;
+   }
+
+   public void setLastName(String lastName) {
+      this.lastName = lastName;
+   }
+}
+```
+
+and sample data:
+
+```
+{
+   "id" : 42,
+   "firstName" : "Bill",
+   "lastName" : "Burke"
+}
+```
+
+reading in the data to create a **Customer** object would be as easy as this:
+
+```Java
+ObjectMapper mapper = new ObjectMapper();
+Customer cust = mapper.readValue(inputStream, Customer.class);
+```
+
+Writing the data would be as easy as this:
+
+```Java
+ObjectMapper mapper = new ObjectMapper();
+mapper.writeValue(outputStream, customer);
+```
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+The Jackson framework’s JAX-RS integration actually does all this work for you, so all you have to do in your JAX-RS classes is specify the output and input format as **application/json** when writing your JAX-RS methods.
 
 
 
 ---
 [^5] For more information, see http://jettison.codehaus.org.
-
+[^6] http://jackson.codehaus.org/
