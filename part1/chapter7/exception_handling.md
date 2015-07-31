@@ -124,11 +124,11 @@ public class CustomerResource {
 Like the other exceptions in the exception hierarchy, **NotFoundException** inherits from **WebApplicationException**. If you looked at the code, you’d see that in its constructor it is initializing the status code to be 404. Table 7-1 lists some other exceptions you can use for error conditions that are under the **javax.ws.rs package**.
 
 
-
-
----
-
 Table 7-1. JAX-RS exception hierarchy
+
+| Exception | Status code | Description |
+| --------- | :-------------: | -----: |
+| BadRequestException | 400 | Malformed message |
 
 
 
