@@ -428,4 +428,5 @@ The Jackson framework’s JAX-RS integration actually does all this work for you
 
 ---
 [^5] For more information, see http://jettison.codehaus.org.
+
 [^6] http://jackson.codehaus.org/
