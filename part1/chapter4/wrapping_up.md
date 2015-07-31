@@ -1,0 +1,4 @@
+# Wrapping Up
+
+
+In this chapter, we examined the intricacies of the **@javax.ws.rs.Path** annotation. **@Path** allows you to define complex URI matching patterns that can map to a Java method. These patterns can be defined using regular expressions and also support encoding. We also discussed subresource locators, which allow you to programmatically perform your own dynamic dispatching of HTTP requests. Finally, we looked at how you can hook into new HTTP operations by using the **@HttpMethod** annotation. You can test-drive the code in this chapter in [Chapter 19](../../part2/chapter19/example_ex04_1_http_method_extension.md).
