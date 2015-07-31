@@ -127,8 +127,86 @@ Like the other exceptions in the exception hierarchy, **NotFoundException** inhe
 Table 7-1. JAX-RS exception hierarchy
 
 | Exception | Status code | Description |
-| --------- | :-------------: | -----: |
+| --------- | :-------------: | :-----: |
 | BadRequestException | 400 | Malformed message |
+| NotAuthorizedException | 401 | Authentication failure |
+| ForbiddenException | 403 | Not permitted to access |
+| NotFoundException | 404 | Couldn’t find resource |
+| NotAllowedException | 405 | HTTP method not supported |
+| NotAcceptableException | 406 | Client media type requested not supported |
+| NotSupportedException | 415 | Client posted media type not supported |
+| InternalServerErrorException | 500 | General server error |
+| ServiceUnavailableException | 503 | Server is temporarily unavailable or busy |
 
+
+**BadRequestException** is used when the client sends something to the server that the server cannot interpret. The JAX-RS runtime will actually throw this exception in certain scenarios. The most obvious is when a PUT or POST request has submitted malformed XML or JSON that the **MessageBodyReader** fails to parse. JAX-RS will also throw this exception if it fails to convert a header or cookie value to the desired type. For example:
+
+
+```Java
+@HeaderParam("Custom-Header") int header;
+@CookieParam("myCookie") int cookie;
+```
+
+
+If the HTTP request’s **Custom-Header** value or the **myCookie** value cannot be parsed into an integer, **BadRequestException** is thrown.
+
+
+**NotAuthorizedException** is used when you want to write your own authentication protocols. The 401 HTTP response code this exception represents requires you to send back a challenge header called **WWW-Authenticate**. This header is used to tell the client how it should authenticate with the server. **NotAuthorizedException** has a few convenience constructors that make it easier to build this header automatically:
+
+
+```Java
+    public NotAuthorizedException(Object challenge, Object... moreChallenges) {}
+```
+
+
+For example, if I wanted to tell the client that OAuth Bearer tokens are required for authentication, I would throw this exception:
+
+
+```Java
+    throw new NotAuthorizedException("Bearer");
+```
+
+
+The client would receive this HTTP response:
+
+```
+HTTP/1.1 401 Not Authorized
+WWW-Authenticate: Bearer
+```
+
+
+**ForbiddenException** is generally used when the client making the invocation does not have permission to access the resource it is invoking on. In Java EE land, this is usually because the authenticated client does not have the specific role mapping required.
+
+
+**NotFoundException** is used when you want to tell the client that the resource it is requesting does not exist. There are also some error conditions where the JAX-RS runtime will throw this exception automatically. If the JAX-RS runtime fails to inject into an **@PathParam**, **@QueryParam**, or **@MatrixParam**, it will throw this exception. Like in the conditions discussed for **BadRequestException**, this can happen if you are trying to convert to a type the parameter value isn’t meant for.
+
+
+**NotAllowedException** is used when the HTTP method the client is trying to invoke isn’t supported by the resource the client is accessing. The JAX-RS runtime will automatically throw this exception if there isn’t a JAX-RS method that matches the invoked HTTP method.
+
+
+**NotAcceptableException** is used when the client is requesting a specific format through the **Accept** header. The JAX-RS runtime will automatically throw this exception if there is not a JAX-RS method with an **@Produces** annotation that is compatible with the client’s **Accept** header.
+
+
+**NotSupportedException** is used when a client is posting a representation that the server does not understand. The JAX-RS runtime will automatically throw this exception if there is no JAX-RS method with an @Consumes annotation that matches the **Content-Type** of the posted entity.
+
+
+**InternalServerErrorException** is a general-purpose error that is thrown by the server. For applications, you would throw this exception if you’ve reached an error condition that doesn’t really fit with the other HTTP error codes. The JAX-RS runtime throws this exception if a **MessageBodyWriter** fails or if there is an exception thrown from an **ExceptionMapper**.
+
+
+**ServiceUnavailableException** is used when the server is temporarily unavailable or busy. In most cases, it is OK for the client to retry the request at a later time. The HTTP 503 status code is often sent with a **Retry-After** header. This header is a suggestion to the client when it might be OK to retry the request. Its value is in seconds or a formatted date string. 
+
+
+**ServiceUnavailableException** has a few convenience constructors to help with initializing this header:
+
+```Java
+    public ServiceUnavailableException(Long retryAfter) {}
+    public ServiceUnavailableException(Date retryAfter) {}
+```
+
+
+#### Mapping default exceptions
+
+
+What’s interesting about the default error handling for JAX-RS is that you can write an **ExceptionMapper** for these scenarios. For example, if you want to send back a different response to the client when JAX-RS cannot find an **@Produces** match for an **Accept** header, you can write an **ExceptionMapper** for **NotAcceptableException**. This gives you complete control on how errors are handled by your application.
 
 
