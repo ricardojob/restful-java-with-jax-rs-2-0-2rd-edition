@@ -13,4 +13,4 @@ All the injection annotations described in this chapter reference various parts 
 1. It is a primitive type. The **int**, **short**, **float**, **double**, **byte**, **char**, and **boolean** types all fit into this category. 
 2. It is a Java class that has a constructor with a single **String** parameter. 
 3. It is a Java class that has a static method named **valueOf()** that takes a single **String** argument and returns an instance of the class. 
-4. It is a **java.util.List<T>**, **java.util.Set<T>**, or **java.util.SortedSet<T>**, where **T** is a type that satisfies criteria 2 or 3 or is a **String**. Examples are **List<Double>**, **Set<String>**, or **SortedSet<Integer>**. 
+4. It is a **java.util.List\<T\>**, **java.util.Set\<T\>**, or **java.util.SortedSet\<T\>**, where **T** is a type that satisfies criteria 2 or 3 or is a **String**. Examples are **List\<Double\>**, **Set\<String\>**, or **SortedSet\<Integer\>**. 
