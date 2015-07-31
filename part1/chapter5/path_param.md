@@ -137,6 +137,57 @@ public class CarResource {
 In this example, if our request was **GET /cars/mercedes/e55/amg/year/2006**, the car parameter would have a list of two **PathSegments** injected into it, one representing the **e55** segment and the other representing the **amg** segment. We could then query and pull in matrix parameters as needed from these segments.
 
 
+### Programmatic URI Information
+
+
+All this à la carte injection of path parameter data with the **@PathParam** annotation is perfect most of the time. Sometimes, though, you need a more general raw API to query and browse information about the incoming request’s URI. The interface **javax.ws.rs.core.UriInfo** provides such an API:
+
+
+```Java
+public interface UriInfo {
+   public String getPath();
+   public String getPath(boolean decode);
+   public List<PathSegment> getPathSegments();
+   public List<PathSegment> getPathSegments(boolean decode);
+   public MultivaluedMap<String, String> getPathParameters();
+   public MultivaluedMap<String, String> getPathParameters(boolean decode);
+...
+}
+```
+
+
+The **getPath()** methods allow you to obtain the relative path JAX-RS used to match the incoming request. You can receive the path string decoded or encoded. The **getPathSegments()** methods break up the entire relative path into a series of **PathSegment** objects. Like **getPath()**, you can receive this information encoded or decoded. Finally, **getPathParameters()** returns a map of all the path parameters defined for all matching **@Path** expressions.
+
+
+You can obtain an instance of the **UriInfo** interface by using the **@javax.ws.rs.core.Context** injection annotation. Here’s an example:
+
+
+```Java
+@Path("/cars/{make}")
+public class CarResource {
+
+   @GET
+   @Path("/{model}/{year}")
+   @Produces("image/jpeg")
+   public Jpeg getPicture(@Context UriInfo info) {
+      String make = info.getPathParameters().getFirst("make");
+      PathSegment model = info.getPathSegments().get(1);
+      String color = model.getMatrixParameters().getFirst("color");
+...
+   }
+}
+```
+
+In this example, we inject an instance of **UriInfo** into the **getPicture()** method’s **info** parameter. We then use this instance to extract information out of the URI.
+
+
+
+
+
+
+
+
+
 
 
 
