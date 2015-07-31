@@ -254,7 +254,41 @@ Key and value pairs are separated by a colon character and delimited by commas. 
 
 As you can see, JSON is a much simpler format than XML. While XML has elements, attributes, and namespaces, JSON only has name/value pairs. There has been some work in the JSON community to produce a mapping between XML and JSON so that one XML schema can output documents of both formats. The de facto standard, BadgerFish, is a widely used XML-to-JSON mapping and is available in most JAX-RS implementations that have JAXB/JSON support. Let’s go over this mapping:
 
-1. XML element names become JSON object properties and the text values of these elements are contained within a nested object that has a property named “$.” So, if you had the XML **&lt;customer&gt;Bill Burke&lt;/customer&gt;**, it would map to { "customer" : { "$" : "Bill Burke" }}. 
+1. XML element names become JSON object properties and the text values of these elements are contained within a nested object that has a property named “$.” So, if you had the XML **&lt;customer&gt;Bill Burke&lt;/customer&gt;**, it would map to **{ "customer" : { "$" : "Bill Burke" }}**.
+2. XML elements become properties of their base element. Suppose you had the following XML: 
+
+    ```xml
+    <customer>
+        <first>Bill</first>
+        <last>Burke</last>
+    </customer>
+    ```
+
+    The JSON mapping would look like:
+    
+    ```
+    { "customer" :
+        { "first" : { "$" : "Bill"},
+          "last" : { "$" : "Burke" }
+        }
+    }
+    ```
+3. Multiple nested elements of the same name would become an array value. So, the XML: 
+
+    ```xml
+    <customer>
+        <phone>978-666-5555</phone>
+        <phone>978-555-2233</phone>
+    </customer>
+    ```
+    
+    would look like the following in JSON:
+    
+    ```
+    { "customer" :
+        { "phone" : [ { "$", "978-666-5555"}, { "$", "978-555-2233"} ] }
+    }
+    ```
 
 
 
