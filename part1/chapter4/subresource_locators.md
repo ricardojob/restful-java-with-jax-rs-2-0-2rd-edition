@@ -65,4 +65,75 @@ public class CustomerResource {
 So, if a client sends **GET /customers/northamerica-db/333**, the JAX-RS provider will first match the expression on the method **CustomerDatabaseResource.getDatabase()**. It will then match and process the remaining part of the request with the method **CustomerResource.getCustomer()**.
 
 
+Besides the added constructor, another difference in the **CustomerResource** class from previous examples is that it is no longer annotated with **@Path**. It is no longer a root resource in our system; it is a subresource and must not be registered with the JAX-RS runtime within an **Application** class.
+
+
+### Full Dynamic Dispatching
+
+
+While our previous example does illustrate the concept of subresource locators, it does not show their full dynamic nature. The **CustomerDatabaseResource.getDatabase()** method can return any instance of any class. At runtime, the JAX-RS provider will introspect this instance’s class for resource methods that can handle the request.
+
+
+Let’s say that in our example, we have two customer databases with different kinds of identifiers. One database uses a numeric key, as we talked about before. The other uses first and last name as a composite key. We would need to have two different classes to extract the appropriate information from the URI. Let’s change our example:
+
+
+```Java
+@Path("/customers")
+public class CustomerDatabaseResource {
+
+   protected CustomerResource europe = new CustomerResource();
+   protected FirstLastCustomerResource northamerica =
+                              new FirstLastCustomerResource();
+
+   @Path("{database}-db")
+   public Object getDatabase(@PathParam("database") String db) {
+      if (db.equals("europe")) {
+          return europe;
+      }
+      else if (db.equals("northamerica")) {
+          return northamerica;
+      }
+      else return null;
+   }
+}
+```
+
+
+Instead of our **getDatabase()** method returning a **CustomerResource**, it will return any **java.lang.Object**. JAX-RS will introspect the instance returned to figure out how to dispatch the request. For this example, if our database is **europe**, we will use our original **CustomerResource** class to service the remainder of the request. If our database is **northamerica**, we will use a new subresource class **FirstLastCustomerResource**:
+
+
+```Java
+public class FirstLastCustomerResource {
+   private Map<String, Customer> customerDB =
+                          new ConcurrentHashMap<String, Customer>();
+
+      @GET
+   @Path("{first}-{last}")
+   @Produces("application/xml")
+   public StreamingOutput getCustomer(@PathParam("first") String firstName,
+                                      @PathParam("last") String lastName) {
+     ...
+   }
+
+   @PUT
+   @Path("{first}-{last}")
+   @Consumes("application/xml")
+   public void updateCustomer(@PathParam("first") String firstName,
+                              @PathParam("last") String lastName,
+                              InputStream is) {
+      ...
+   }
+}
+```
+
+
+Customer lookup requests routed to **europe** would match the **/customers/{database}-db/{id}** URI pattern defined in **CustomerResource**. Requests routed to **northamerica** would match the **/customers/{database}-db/{first}-{last}** URI pattern defined in **FirstLastCustomerResource**. This type of pattern gives you a lot of freedom to dispatch your own requests.
+
+
+
+
+
+
+
+
 
