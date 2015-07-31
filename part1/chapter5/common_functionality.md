@@ -166,6 +166,62 @@ In our implementation here, we check to see if the **rawType** is a **Color**. I
 
 
 
+#### Collections
+
+
+All the parameter types described in this chapter may have multiple values for the same named parameter. For instance, let’s revisit the **@QueryParam** example from earlier in this chapter. In that example, we wanted to pull down a set of customers from a customer database. Let’s expand the functionality of this query so that we can order the data sent back by any number of customer attributes:
+
+
+```
+GET /customers?orderBy=last&orderBy=first
+```
+
+
+In this request, the **orderBy** query parameter is repeated twice with different values. We can let our JAX-RS provider represent these two parameters as a **java.util.List** and inject this list with one **@QueryParam** annotation:
+
+
+```Java
+import java.util.List;
+
+@Path("/customers")
+public class CustomerResource {
+
+   @GET
+   @Produces("application/xml")
+   public String getCustomers(
+                   @QueryParam("start") int start,
+                   @QueryParam("size") int size,
+                   @QueryParam("orderBy") List<String> orderBy) {
+     ...
+   }
+}
+```
+
+
+You must define the generic type the **List** will contain; otherwise, JAX-RS won’t know which objects to fill it with.
+
+
+#### Conversion failures
+
+
+If the JAX-RS provider fails to convert a string into the Java type specified, it is considered a client error. If this failure happens during the processing of an injection for an **@MatrixParam**, **@QueryParam**, or **@PathParam**, an error status of 404, “Not Found,” is sent back to the client. If the failure happens with **@HeaderParam** or **@CookieParam**, an error response code of 400, “Bad Request,” is sent.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
