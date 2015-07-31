@@ -208,7 +208,53 @@ If the JAX-RS provider fails to convert a string into the Java type specified, i
 
 
 
+### @DefaultValue
 
+
+In many types of JAX-RS services, you may have parameters that are optional. When a client does not provide this optional information within the request, JAX-RS will, by default, inject a null value for object types and a zero value for primitive types.
+
+
+Many times, though, a null or zero value may not work as a default value for your injection. To solve this problem, you can define your own default value for optional parameters by using the **@javax.ws.rs.DefaultValue** annotation.
+
+
+
+For instance, let’s look back again at the **@QueryParam** example given earlier in this chapter. In that example, we wanted to pull down a set of customers from a customer database. We used the **start** and **size** query parameters to specify the beginning index and the number of customers desired. While we do want to control the amount of customers sent back as a response, we do not want to require the client to send these query parameters when making a request. We can use **@DefaultValue** to set a base index and dataset size:
+
+
+
+```Java
+import java.util.List;
+
+@Path("/customers")
+public class CustomerResource {
+
+   @GET
+   @Produces("application/xml")
+   public String getCustomers(@DefaultValue("0") @QueryParam("start") int start,
+                           @DefaultValue("10") @QueryParam("size") int size) {
+     ...
+   }
+}
+```
+
+
+Here, we’ve used **@DefaultValue** to specify a default start index of 0 and a default dataset size of **10**. JAX-RS will use the string conversion rules to convert the string value of the **@DefaultValue** annotation into the desired Java type.
+
+
+### @Encoded
+
+
+URI template, matrix, query, and form parameters must all be encoded by the HTTP specification. By default, JAX-RS decodes these values before converting them into the desired Java types. Sometimes, though, you may want to work with the raw encoded values. Using the **@javax.ws.rs.Encoded** annotation gives you the desired effect:
+
+
+```Java
+@GET
+@Produces("application/xml")
+public String get(@Encoded @QueryParam("something") String str) {...}
+```
+
+
+Here, we’ve used the **@Encoded** annotation to specify that we want the encoded value of the **something** query parameter to be injected into the **str** Java parameter. If you want to work solely with encoded values within your Java method or even your entire class, you can annotate the method or class with **@Encoded** and only encoded values will be used.
 
 
 
