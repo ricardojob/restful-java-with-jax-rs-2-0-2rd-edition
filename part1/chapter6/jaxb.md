@@ -147,6 +147,114 @@ We first create an initialized instance of a **Customer** class. We then initial
 Now that we have a general idea of how JAXB works, let’s look at how JAX-RS integrates with it.
 
 
+### JAXB JAX-RS Handlers
+
+
+The JAX-RS specification requires implementations to automatically support the marshalling and unmarshalling of classes that are annotated with **@XmlRootElement** or **@XmlType** as well as objects wrapped inside **javax.xml.bind.JAXBElement** instances. Here’s an example that interacts using the **Customer** class defined earlier:
+
+
+```Java
+@Path("/customers")
+public class CustomerResource {
+
+   @GET
+   @Path("{id}")
+   @Produces("application/xml")
+   public Customer getCustomer(@PathParam("id") int id) {
+
+      Customer cust = findCustomer(id);
+      return cust;
+   }
+
+   @POST
+   @Consumes("application/xml")
+   public void createCustomer(Customer cust) {
+      ...
+   }
+}
+```
+
+
+As you can see, once you’ve applied JAXB annotations to your Java classes, it is very easy to exchange XML documents between your client and web services. The built-in JAXB handlers will handle any JAXB-annotated class for the **application/xml**, **text/xml**, or **application/\*+xml** media types. By default, they will also manage the creation and initialization of JAXBContext instances. Because the creation of JAXBContext instances can be expensive, JAX-RS implementations usually cache them after they are first initialized.
+
+
+#### Managing your own JAXBContexts with ContextResolvers
+
+
+If you are already familiar with JAXB, you’ll know that many times you need to configure your **JAXBContext** instances a certain way to get the output you desire. The JAX-RS built-in JAXB provider allows you to plug in your own **JAXBContext** instances. The way it works is that you have to implement a factory-like interface called **javax.ws.rs.ext.ContextResolver** to override the default **JAXBContext** creation:
+
+
+```Java
+public interface ContextResolver<T> {
+
+   T getContext(Class<?> type);
+}
+```
+
+
+**ContextResolvers** are pluggable factories that create objects of a specific type, for a certain Java type, and for a specific media type. To plug in your own **JAXBContext**, you will have to implement this interface. Here’s an example of creating a specific **JAXBContext** for our **Customer** class:
+
+
+
+```Java
+@Provider
+@Produces("application/xml")
+public class CustomerResolver
+                      implements ContextResolver<JAXBContext> {
+   private JAXBContext ctx;
+
+   public CustomerResolver() {
+     this.ctx = ...; // initialize it the way you want
+   }
+
+
+   public JAXBContext getContext(Class<?> type) {
+      if (type.equals(Customer.class)) {
+         return ctx;
+      } else {
+         return null;
+      }
+   }
+}
+```
+
+Your resolver class must implement **ContextResolver** with the parameterized type of **JAXBContext**. The class must also be annotated with the **@javax.ws.rs.ext.Provider** annotation to identify it as a JAX-RS component. In our example, the **CustomerResolver** constructor initializes a **JAXBContext** specific to our **Customer** class.
+
+
+You register your **ContextResolver** using the **javax.ws.rs.core.Application** API discussed in Chapters [3](../chapter3/your_first_jax_rs_service.md) and [14](../../part1/chapter14/ejb_integration.md). The built-in JAXB handler will see if there are any registered **ContextResolvers** that can create **JAXBContext** instances. It will iterate through them, calling the **getContext()** method passing in the Java type it wants a **JAXBContext** created for. If the **getContext()** method returns **null**, it will go on to the next **ContextResolver** in the list. If the **getContext()** method returns an instance, it will use that **JAXBContext** to handle the request. If there are no **ContextResolvers** found, it will create and manage its own **JAXBContext**. In our example, the **CustomerResolver.getContext()** method checks to see if the type is a **Customer** class. If it is, it returns the **JAXBContext** we initialized in the constructor; otherwise, it returns **null**.
+
+
+The **@Produces** annotation on your **CustomerResolver** implementation is optional. It allows you to specialize a **ContextResolver** for a specific media type. You’ll see in the next section that you can use JAXB to output to formats other than XML. This is a way to create **JAXBContext** instances for each individual media type in your system.
+
+
+### JAXB and JSON
+
+
+JAXB is flexible enough to support formats other than XML. The Jettison[^5] open source project has written a JAXB adapter that can input and output the JSON format. JSON is a text-based format that can be directly interpreted by JavaScript. It is the preferred exchange format for Ajax applications. Although not required by the JAX-RS specification, many JAX-RS implementations use Jettison to support marshalling JAXB annotated classes to and from JSON.
+
+
+JSON is a much simpler format than XML. Objects are enclosed in curly brackets, “{}”, and contain key/value pairs. Values can be quoted strings, Booleans (true or false), numeric values, or arrays of these simple types. Here’s an example:
+
+
+```
+{
+  "id" : 42,
+  "name" : "Bill Burke",
+  "married" : true,
+  "kids" : [ "Molly", "Abby" ]
+}
+```
+
+
+Key and value pairs are separated by a colon character and delimited by commas. Arrays are enclosed in brackets, “[].” Here, our object has four properties—**id**, **name**, **married**, and **kids**—with varying values.
+
+
+#### XML to JSON using BadgerFish
+
+
+As you can see, JSON is a much simpler format than XML. While XML has elements, attributes, and namespaces, JSON only has name/value pairs. There has been some work in the JSON community to produce a mapping between XML and JSON so that one XML schema can output documents of both formats. The de facto standard, BadgerFish, is a widely used XML-to-JSON mapping and is available in most JAX-RS implementations that have JAXB/JSON support. Let’s go over this mapping:
+
+1. XML element names become JSON object properties and the text values of these elements are contained within a nested object that has a property named “$.” So, if you had the XML **&lt;customer&gt;Bill Burke&lt;/customer&gt;**, it would map to { "customer" : { "$" : "Bill Burke" }}. 
 
 
 
@@ -181,9 +289,6 @@ Now that we have a general idea of how JAXB works, let’s look at how JAX-RS in
 
 
 
-
-
-
-
-
+---
+[^5] For more information, see http://jettison.codehaus.org.
 
