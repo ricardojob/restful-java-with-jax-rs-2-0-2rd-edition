@@ -1,0 +1,4 @@
+# Chapter 26. Examples for Chapter 12
+
+
+In [Chapter 12](../../part1/chapter12/filters_and_interceptors.md), you learned how filters and interceptors can be used to augment your JAX-RS service classes. In this chapter, we through how to build and run some of the examples shown in that chapter. Specifically, we’ll go write a **ContainerResponseFilter**, a **DynamicFeature**, and an implementation of a **WriterInterceptor**. If you want to see examples of a **ClientRequestFilter** and a **ContainerRequestFilter** bound via a **@NameBinding**, check out [Chapter 29](../chapter29/examples_for_chapter_15.md).
