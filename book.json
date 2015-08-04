@@ -1,7 +1,8 @@
 {
     "plugins": [
         "image-captions",
-        "toggle-chapters"
+        "toggle-chapters",
+        "codeblock-filename"
     ],
     "pluginsConfig": {
       "image-captions": {
