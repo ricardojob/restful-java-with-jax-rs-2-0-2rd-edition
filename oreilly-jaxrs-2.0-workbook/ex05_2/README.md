@@ -1,4 +1,4 @@
-Injection Annotations
+Injection Annotations (2)
 =====================
 
 This project is a simple example showing usage of JAX-RS injection annotations.
