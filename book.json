@@ -21,7 +21,7 @@
             "Info" : true,
             "Warning" : true,
             "Quote" : true,
-            "Quote" : true
+            "Tip" : true
         }
     }
 }
