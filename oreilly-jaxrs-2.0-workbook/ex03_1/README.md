@@ -24,7 +24,7 @@ Source Code Hierarchy:
 
 ```
 ex03_1
-|-- [pom.xml](oreilly-jaxrs-2.0-workbook/ex03_1/pom.xml)
+|-- pom.xml
 `-- src
     |-- main
     |   |-- java
@@ -32,7 +32,7 @@ ex03_1
     |   |       `-- restfully
     |   |           `-- shop
     |   |               |-- domain
-    |   |               |   `-- [Customer.java](oreilly-jaxrs-2.0-workbook/ex03_1/src/main/java/com/restfully/shop/domain/Customer.java)
+    |   |               |   `-- Customer.java
     |   |               `-- services
     |   |                   |-- CustomerResource.java
     |   |                   `-- ShoppingApplication.java
