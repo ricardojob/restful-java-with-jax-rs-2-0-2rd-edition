@@ -87,6 +87,6 @@ ex05_1
 !CODEFILE "./src/main/java/com/restfully/shop/services/CarResource.java"
 
 
-*src/test/java/com/restfully/shop/test/CustomerResourceTest.java*
+*src/test/java/com/restfully/shop/test/InjectionTest.java*
 
-!CODEFILE "./src/test/java/com/restfully/shop/test/CustomerResourceTest.java"
+!CODEFILE "./src/test/java/com/restfully/shop/test/InjectionTest.java"
