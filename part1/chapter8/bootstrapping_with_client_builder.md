@@ -70,8 +70,7 @@ Client client = ClientBuilder.newBuilder()
 We create a **ClientBuilder** instance by calling the static method **ClientBuilder.newBuilder()**. We then set a proprietary, JAX-RS implementation–specific configuration property that controls socket connection timeouts. Next we specify the **sslContext** we want to use to manage **HTTPS** connections. The RESTful services we’re going to interact with are primarily JSON, so we **register()** an **@Provider** that knows how to marshal Java objects to and from JSON. Finally, we call **build()** to create the **Client** instance.
 
 
-> #### Warning
-> Always remember to **close()** your **Client** objects. Client objects often pool connections for performance reasons. If you do not close them, you are leaking valuable system resources. While most JAX-RS implementations implement a **finalize()** method for **Client**, it is not a good idea to rely on the garbage collector to clean up poorly written code.
+> **Warning**  Always remember to **close()** your **Client** objects. Client objects often pool connections for performance reasons. If you do not close them, you are leaking valuable system resources. While most JAX-RS implementations implement a **finalize()** method for **Client**, it is not a good idea to rely on the garbage collector to clean up poorly written code.
 
 
 

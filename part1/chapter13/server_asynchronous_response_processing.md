@@ -13,8 +13,7 @@ The nature of HTTP traffic started to change somewhat as JavaScript clients star
 In 2009, the Servlet 3.0 specification introduced asynchronous HTTP. With the Servlet 3.0 API, you can suspend the current server-side request and have a separate thread, other than the calling thread, handle sending back a response to the client. For a server-push app, you could then have a small handful of threads manage sending responses back to polling clients and avoid all the overhead of the “one thread per connection” model. JAX-RS 2.0 introduced a similar API that we’ll discuss in this section.
 
 
-> **Note**  #####Note
-> Server-side async response processing is only meant for a specific small subset of applications. Asynchronous doesn’t necessarily mean automatic scalability. For the typical web app, using server asynchronous response processing will only complicate your code and make it harder to maintain. It may even hurt performance.
+> **Note**  Server-side async response processing is only meant for a specific small subset of applications. Asynchronous doesn’t necessarily mean automatic scalability. For the typical web app, using server asynchronous response processing will only complicate your code and make it harder to maintain. It may even hurt performance.
 
 
 
@@ -398,8 +397,7 @@ public class ChatResource {
 This is a really poor chat implementation, as messages could be lost for clients that are repolling, but hopefully it illustrates how you might create such an application. In [Chapter 27](../../part2/chapter27/example_ex13_1_chat_rest_interface.md), we’ll implement a more robust and complete chat service.
 
 
-> ##### Note
-> With protocols like WebSocket[^13] and Server Sent Events (SSE)[^14] being supported in most browsers, pure HTTP server push and pub-sub are fast becoming legacy. So, if you’re only going to have browser clients for this kind of app, you’re probably better off using WebSockets or SSE.
+> **Note**  With protocols like WebSocket[^13] and Server Sent Events (SSE)[^14] being supported in most browsers, pure HTTP server push and pub-sub are fast becoming legacy. So, if you’re only going to have browser clients for this kind of app, you’re probably better off using WebSockets or SSE.
 
 
 

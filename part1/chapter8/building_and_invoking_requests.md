@@ -119,8 +119,7 @@ try {
 In this example, the call to **bufferEntity()** allows us to extract the HTTP response content into different Java types, the first type being a **Customer** and the second a **java.util.Map** that represents raw JSON data. If we didn’t buffer the entity, the second **readEntity()** call would result in an **IllegalStateException**.
 
 
-> #### Warning
-> Always remember to **close()** your **Response** objects. **Response** objects reference open socket streams. If you do not close them, you are leaking system resources. While most JAX-RS implementations implement a **finalize()** method for **Response**, it is not a good idea to rely on the garbage collector to clean up poorly written code. The default behavior of the RESTEasy JAX-RS implementation actually only lets you have one open **Response** per **Client** instance. This forces you to write responsible client code.
+> **Warning** Always remember to **close()** your **Response** objects. **Response** objects reference open socket streams. If you do not close them, you are leaking system resources. While most JAX-RS implementations implement a **finalize()** method for **Response**, it is not a good idea to rely on the garbage collector to clean up poorly written code. The default behavior of the RESTEasy JAX-RS implementation actually only lets you have one open **Response** per **Client** instance. This forces you to write responsible client code.
 
 
 So far we haven’t discussed PUT and POST requests that submit a representation to the server. These types of requests have similar method styles to GET but also specify an entity parameter:

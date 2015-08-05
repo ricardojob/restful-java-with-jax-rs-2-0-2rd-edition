@@ -123,8 +123,7 @@ You can obtain any exception thrown by the JAX-RS runtime when an asynchronous r
 In the example, the call to **future2.get()** unmarshalls the response to an **Order** object. If the response is something other than 200, “OK,” then the JAX-RS runtime throws one of the exceptions from the JAX-RS error exception hierarchy (i.e., **NotFoundException** or **BadRequestException**). If an exception is thrown while you’re unmarshalling the response to a **Order**, then **ResponseProcessingException** is thrown.
 
 
-> #### Warning
-> You should always make sure that the underlying JAX-RS response is closed. While most JAX-RS containers will have their **Response** objects implement a **finalize()** method, it is not a good idea to rely on the garbage collector to clean up your client connections. If you do not clean up your connections, you may end up with intermittent errors that pop up if the underlying **Client** or operating system has exhausted its limit of allowable open connections.
+> **Warning**  You should always make sure that the underlying JAX-RS response is closed. While most JAX-RS containers will have their **Response** objects implement a **finalize()** method, it is not a good idea to rely on the garbage collector to clean up your client connections. If you do not clean up your connections, you may end up with intermittent errors that pop up if the underlying **Client** or operating system has exhausted its limit of allowable open connections.
 
 
 
