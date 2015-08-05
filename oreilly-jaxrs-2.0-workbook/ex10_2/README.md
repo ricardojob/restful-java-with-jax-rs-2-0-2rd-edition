@@ -117,6 +117,6 @@ ex10_2
 !CODEFILE "./src/main/java/com/restfully/shop/services/ShoppingApplication.java"
 
 
-*src/test/java/com/restfully/shop/test/CustomerResourceTest.java*
+*src/test/java/com/restfully/shop/test/OrderResourceTest.java*
 
-!CODEFILE "./src/test/java/com/restfully/shop/test/CustomerResourceTest.java"
+!CODEFILE "./src/test/java/com/restfully/shop/test/OrderResourceTest.java"
