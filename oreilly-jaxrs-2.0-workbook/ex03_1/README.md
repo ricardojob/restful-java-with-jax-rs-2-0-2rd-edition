@@ -8,6 +8,7 @@ System Requirements:
 
 Building the project:
 -------------------------
+
 1. In root directory **mvn clean install**
 
 This will build a WAR and run it with embedded Jetty
