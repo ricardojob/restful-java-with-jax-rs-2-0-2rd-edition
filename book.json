@@ -16,7 +16,11 @@
             "className": "toc"
         },
         "richquotes": {
-            "Note" : true /*false by default*/
+            "Note" : true,
+            "Danger" : true,
+            "Info" : true,
+            "Warning" : true,
+            "Quote" : true
         }
     }
 }
