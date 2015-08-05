@@ -135,7 +135,7 @@
    * [Example ex14_2: Spring and JAX-RS](part2/chapter28/example_ex14_2_spring_and_jax_rs.md)
 * [Examples for Chapter 15](part2/chapter29/examples_for_chapter_15.md)
    * [Example ex15_1: Custom Security](part2/chapter29/example_ex15_1_custom_security.md)
-   * [Example ex15_1: JSON Web Encryption](part2/chapter29/example_ex15_1_json_web_encryption.md)
+   * [Example ex15_2: JSON Web Encryption](part2/chapter29/example_ex15_2_json_web_encryption.md)
 * [Workbook](oreilly-jaxrs-2.0-workbook/README.md)
    * [Workbook ex03_1](oreilly-jaxrs-2.0-workbook/ex03_1/README.md)
    * [Workbook ex04_1](oreilly-jaxrs-2.0-workbook/ex04_1/README.md)
