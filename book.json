@@ -2,7 +2,8 @@
     "plugins": [
         "image-captions",
         "toggle-chapters",
-        "codeblock-filename"
+        "codeblock-filename",
+        "include-highlight"
     ],
     "pluginsConfig": {
       "image-captions": {
