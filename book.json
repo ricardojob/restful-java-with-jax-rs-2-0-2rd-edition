@@ -20,6 +20,7 @@
             "Danger" : true,
             "Info" : true,
             "Warning" : true,
+            "Quote" : true,
             "Quote" : true
         }
     }
