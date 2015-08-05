@@ -3,11 +3,16 @@
         "image-captions",
         "toggle-chapters",
         "codeblock-filename",
-        "include-highlight"
+        "include-highlight",
+        "toc"
     ],
     "pluginsConfig": {
-      "image-captions": {
-          "caption": "_CAPTION_"
-      }
-  }
+        "image-captions": {
+            "caption": "_CAPTION_"
+        },
+        "toc": {
+            "addClass": true,
+            "className": "toc"
+        }
+    }
 }
