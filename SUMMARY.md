@@ -137,4 +137,4 @@
    * [Example ex15_1: Custom Security](part2/chapter29/example_ex15_1_custom_security.md)
    * [Example ex15_1: JSON Web Encryption](part2/chapter29/example_ex15_1_json_web_encryption.md)
 * [Workbook](oreilly-jaxrs-2.0-workbook/README.md)
-   * [Example ex13_1: Chat REST Interface](part2/chapter27/example_ex13_1_chat_rest_interface.md)
+   * [Workbook ex03_1](oreilly-jaxrs-2.0-workbook/ex03_1/README.md)
