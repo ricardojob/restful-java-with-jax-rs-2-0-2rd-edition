@@ -4,7 +4,8 @@
         "toggle-chapters",
         "codeblock-filename",
         "include-highlight",
-        "toc"
+        "toc",
+        "richquotes"
     ],
     "pluginsConfig": {
         "image-captions": {
@@ -13,6 +14,9 @@
         "toc": {
             "addClass": true,
             "className": "toc"
+        },
+        "richquotes": {
+            "Note" : true /*false by default*/
         }
     }
 }
