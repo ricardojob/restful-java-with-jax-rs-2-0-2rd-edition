@@ -16,3 +16,34 @@ Building the project:
 
 
 This will build a WAR and run it with embedded Jetty
+
+
+
+Source Code Hierarchy:
+-------------------------
+
+```
+ex03_1
+|-- [pom.xml](oreilly-jaxrs-2.0-workbook/ex03_1/pom.xml)
+`-- src
+    |-- main
+    |   |-- java
+    |   |   `-- com
+    |   |       `-- restfully
+    |   |           `-- shop
+    |   |               |-- domain
+    |   |               |   `-- [Customer.java](oreilly-jaxrs-2.0-workbook/ex03_1/src/main/java/com/restfully/shop/domain/Customer.java)
+    |   |               `-- services
+    |   |                   |-- CustomerResource.java
+    |   |                   `-- ShoppingApplication.java
+    |   `-- webapp
+    |       `-- WEB-INF
+    |           `-- web.xml
+    `-- test
+        `-- java
+            `-- com
+                `-- restfully
+                    `-- shop
+                        `-- test
+                            `-- CustomerResourceTest.java
+```
