@@ -47,4 +47,6 @@ ex03_1
                         `-- test
                             `-- CustomerResourceTest.java
 ```
+
+***pom.xml***
 !CODEFILE "./pom.xml"
