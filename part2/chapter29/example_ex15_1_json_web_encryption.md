@@ -1,4 +1,4 @@
-# Example ex15_1: JSON Web Encryption
+# Example ex15_2: JSON Web Encryption
 
 
 In [Chapter 15](../../part1/chapter15/securing_jax_rs.md), you learned a little bit about JSON Web Encryption (JWE) and how it can be used to encrypt HTTP message body or header values. This example augments the customer chat client implemented in [Chapter 27](../chapter27/examples_for_chapter_13.md). Chat clients will use a shared secret to encrypt and decrypt the messages they send to and receive from the chat server. Chat clients that know the shared secret see the decrypted message, while clients that don’t know it see only the JWE encoding. Let’s take a look at the code:
