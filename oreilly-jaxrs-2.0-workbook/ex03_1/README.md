@@ -1,7 +1,6 @@
 Your first JAX_RS Client and Server
 ========================
-This project is a simple example showing usage of @Path, @GET, PUT, POST, and @PathParam.  It uses pure streaming
-output as well. 
+This project is a simple example showing usage of **@Path**, **@GET**, **@PUT**, **@POST**, and **@PathParam**.  It uses pure streaming output as well. 
 
 System Requirements:
 -------------------------
