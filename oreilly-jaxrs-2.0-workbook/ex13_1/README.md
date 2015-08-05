@@ -86,8 +86,3 @@ ex13_1
 *src/main/java/com/restfully/shop/services/ShoppingApplication.java*
 
 !CODEFILE "./src/main/java/com/restfully/shop/services/ShoppingApplication.java"
-
-
-*src/test/java/com/restfully/shop/test/CustomerResourceTest.java*
-
-!CODEFILE "./src/test/java/com/restfully/shop/test/CustomerResourceTest.java"
