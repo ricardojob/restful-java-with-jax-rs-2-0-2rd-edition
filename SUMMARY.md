@@ -136,3 +136,4 @@
 * [Examples for Chapter 15](part2/chapter29/examples_for_chapter_15.md)
    * [Example ex15_1: Custom Security](part2/chapter29/example_ex15_1_custom_security.md)
    * [Example ex15_1: JSON Web Encryption](part2/chapter29/example_ex15_1_json_web_encryption.md)
+* [Workbook](oreilly-jaxrs-2.0-workbook/README.md)
