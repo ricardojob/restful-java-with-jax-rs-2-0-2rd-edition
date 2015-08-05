@@ -7,14 +7,15 @@ Your first JAX_RS Client and Server
 This project is a simple example showing usage of **@Path**, **@GET**, **@PUT**, **@POST**, and **@PathParam**.  It uses pure streaming output as well. 
 
 
-System Requirements:
--------------------------
+## System Requirements
+
+
 - Maven 3.0.4 or higher
 
 
 
-Building the project:
--------------------------
+## Building the project
+
 
 1. In root directory **mvn clean install**
 
@@ -23,9 +24,10 @@ This will build a WAR and run it with embedded Jetty
 
 
 
-Source Code Hierarchy:
--------------------------
+## Source Code
 
+
+### Hierarchy
 ```
 ex03_1
 |-- pom.xml
@@ -52,6 +54,6 @@ ex03_1
                             `-- CustomerResourceTest.java
 ```
 
-***pom.xml***
+#### ***pom.xml***
 
 !CODEFILE "./pom.xml"
