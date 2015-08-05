@@ -74,7 +74,7 @@ In the first request we want JSON from the server, so we set the **Accept** head
 The second request is a little more complicated. We have a special **MessageBodyReader** that knows how to convert XML into **List&lt;Customer&gt;**. The reader is very sensitive to the generic type of the Java object, so it uses the **javax.ws.rs.core.GenericType** class to obtain information about the type. **GenericType** is a sneaky trick that bypasses Java type erasure to obtain generic type information at runtime. To use it, you create an anonymous inner class that implements **GenericType** and fill in the Java generic type you want to pass information about to the template parameter. I know this is a little weird, but there’s no other way around the Java type system.
 
 
-> ###### Tip
+
 > **Tip**  **WebTarget** has additional **request()** methods whose parameters take one or more **String** or **MediaType** parameters. These parameters are media types you want to include in an **Accept** header. I think it makes the code more readable if you use the **Invocation.Builder.accept()** method instead. But this generally is a matter of personal preference.
 
 
