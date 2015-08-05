@@ -1,5 +1,5 @@
-Your first JAX_RS Client and Server
-========================
+# Your first JAX_RS Client and Server
+
 
 <!-- toc -->
 
