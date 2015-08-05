@@ -86,8 +86,7 @@ Now WebDAV clients can invoke **LOCK** operations on our web server and they wil
 
 
 
-> #### Warning
-> Do not use **@HttpMethod** to define your own application-specific HTTP methods. **@HttpMethod** exists to hook into new methods defined by standards bodies like the W3C. The purpose of the uniform interface is to define a set of well-known behaviors across companies and organizations on the Web. Defining your own methods breaks this architectural principle.
+> **Warning**  Do not use **@HttpMethod** to define your own application-specific HTTP methods. **@HttpMethod** exists to hook into new methods defined by standards bodies like the W3C. The purpose of the uniform interface is to define a set of well-known behaviors across companies and organizations on the Web. Defining your own methods breaks this architectural principle.
 
 ---
 [^3] For more information on WebDAV, see http://www.webdav.org.
