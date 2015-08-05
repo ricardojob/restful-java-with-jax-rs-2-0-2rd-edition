@@ -1,18 +1,19 @@
-HTTP Content Negotiation
-=========================
+# HTTP Content Negotiation
+
+
+<!-- toc -->
+
 
 This project is an example of using HTTP conneg to pick between XML and HTML and plain text using file name suffix
 mappings provided by RESTEasy.
 
 
-System Requirements:
--------------------------
+## System Requirements:
 
 - Maven 3.0.4 or higher
 
 
-Building the project:
--------------------------
+## Building the project:
 
 1. In root directory **mvn jetty:run**
 
@@ -26,4 +27,59 @@ http://localhost:8080/services/customers/1.txt
 http://localhost:8080/services/customers/1.html
 
 
-This will build a WAR and run it with embedded Jetty
+This will build a WAR and run it with embedded Jetty.
+
+
+
+
+## Source Code
+
+
+### Hierarchy
+```
+ex09_2
+|-- pom.xml
+`-- src
+    `-- main
+        |-- java
+        |   `-- com
+        |       `-- restfully
+        |           `-- shop
+        |               |-- domain
+        |               |   `-- Customer.java
+        |               `-- services
+        |                   |-- CustomerResource.java
+        |                   `-- ShoppingApplication.java
+        `-- webapp
+            `-- WEB-INF
+                `-- web.xml
+```
+
+
+### Details
+
+
+
+*pom.xml*
+
+!CODEFILE "./pom.xml"
+
+
+*src/main/webapp/WEB-INF/web.xml*
+
+!CODEFILE "./src/main/webapp/WEB-INF/web.xml"
+
+
+*src/main/java/com/restfully/shop/domain/Customer.java*
+
+!CODEFILE "./src/main/java/com/restfully/shop/domain/Customer.java"
+
+
+*src/main/java/com/restfully/shop/services/CustomerResource.java*
+
+!CODEFILE "./src/main/java/com/restfully/shop/services/CustomerResource.java"
+
+
+*src/main/java/com/restfully/shop/services/ShoppingApplication.java*
+
+!CODEFILE "./src/main/java/com/restfully/shop/services/ShoppingApplication.java"
