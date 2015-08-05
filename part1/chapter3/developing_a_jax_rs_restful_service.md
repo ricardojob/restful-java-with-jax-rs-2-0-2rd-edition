@@ -113,7 +113,7 @@ The **@javax.ws.rs.Consumes** annotation applied to **createCustomer()** specifi
 The **createCustomer()** method takes one **java.io.InputStream** parameter. In JAX-RS, any non-JAX-RS-annotated parameter is considered to be a representation of the HTTP input request’s message body. In this case, we want access to the method body in its most basic form, an **InputStream**.
 
 
-> **Warning**  Only one Java method parameter can represent the **HTTP** message body. This means any other parameters must be annotated with one of the JAX-RS annotations discussed in [Chapter 5](../chapter5/jax_rs_injection.md).
+> **Warning**  Only one Java method parameter can represent the HTTP message body. This means any other parameters must be annotated with one of the JAX-RS annotations discussed in [Chapter 5](../chapter5/jax_rs_injection.md).
 
 
 The implementation of the method reads and transforms the POSTed XML into a **Customer** object and stores it in the **customerDB** map. The method returns a complex response to the client using the **javax.ws.rs.core.Response** class. The static **Response.created()** method creates a **Response** object that contains an HTTP status code of 201, “Created.” It also adds a **Location** header to the HTTP response with the value of something like *http://shop.restfully.com/customers/333*, depending on the base URI of the server and the generated ID of the **Customer** object (333 in this example).
