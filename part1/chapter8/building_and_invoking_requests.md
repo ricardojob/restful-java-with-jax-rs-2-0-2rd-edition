@@ -75,7 +75,7 @@ The second request is a little more complicated. We have a special **MessageBody
 
 
 > ###### Tip
-> **WebTarget** has additional **request()** methods whose parameters take one or more **String** or **MediaType** parameters. These parameters are media types you want to include in an **Accept** header. I think it makes the code more readable if you use the **Invocation.Builder.accept()** method instead. But this generally is a matter of personal preference.
+> **Tip**  **WebTarget** has additional **request()** methods whose parameters take one or more **String** or **MediaType** parameters. These parameters are media types you want to include in an **Accept** header. I think it makes the code more readable if you use the **Invocation.Builder.accept()** method instead. But this generally is a matter of personal preference.
 
 
 There’s also a **get()** method that returns a **Response** object. This is the same **Response** class that is used on the server side. This gives you more fine-grained control of the HTTP response on the client side. Here’s an example:
