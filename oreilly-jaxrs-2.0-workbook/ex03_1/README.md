@@ -47,3 +47,5 @@ ex03_1
                         `-- test
                             `-- CustomerResourceTest.java
 ```
+
+{% include "oreilly-jaxrs-2.0-workbook/ex03_1/pom.xml" %}
