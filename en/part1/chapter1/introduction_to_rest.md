@@ -1,4 +1,4 @@
-# Chapter 1. Introduction to REST
+# Chapter 1. REST介绍
 
 
 For those of us with computers, the World Wide Web is an intricate part of our lives. We use it to read the newspaper in the morning, pay our bills, perform stock trades, and buy goods and services, all through the browser, all over the network. “Googling” has become a part of our daily vocabulary as we use search engines to do research for school, find what time a movie is playing, or just search for information on old friends. Door-to-door encyclopedia salesmen have gone the way of the dinosaur as Wikipedia has become the summarized source of human knowledge. People even socialize over the network using sites like Facebook and Google+. Professional social networks are sprouting up in all industries as doctors, lawyers, and all sorts of professionals use them to collaborate. The Web is an intricate part of our daily jobs as programmers. We search for and download open source libraries to help us develop applications and frameworks for our companies. We build web-enabled applications so that anybody on the Internet or intranet can use a browser to interact with our systems.
