@@ -1,6 +1,6 @@
 # Summary
 
-
+* [Introduction](../en/README.md)
 * [Introduction to REST](part1/chapter1/introduction_to_rest.md)
    * [REST and the Rebirth of HTTP](part1/chapter1/rest_and_the_rebirth_of_http.md)
    * [RESTful Architectural Principles](part1/chapter1/restful_architectural_principles.md)
@@ -158,3 +158,4 @@
    * [ex14_2:Spring and JAX-RS](oreilly-jaxrs-2.0-workbook/ex14_2/README.md)
    * [ex15_1:@NameBinding and SecurityContext](oreilly-jaxrs-2.0-workbook/ex15_1/README.md)
    * [ex15_2:JSON Web Encryption with Customer Chat](oreilly-jaxrs-2.0-workbook/ex15_2/README.md)
+
