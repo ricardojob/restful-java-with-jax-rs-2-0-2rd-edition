@@ -1,0 +1,4 @@
+# Wrapping Up
+
+
+In this chapter, we examined how to use JAX-RS injection annotations to insert bits and pieces of an HTTP request à la carte into your JAX-RS resource method parameters. While data is represented as strings within an HTTP request, JAX-RS can automatically convert this data into the Java type you desire, provided that the type follows certain constraints. These features allow you to write compact, easily understandable code and avoid a lot of the boilerplate code you might need if you were using other frameworks like the servlet specification. You can test-drive the code in this chapter by flipping to [Chapter 20](../../part2/chapter20/examples_for_chapter_5.md).

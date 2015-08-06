@@ -1,0 +1,5 @@
+# Wrapping Up
+
+
+
+In this chapter, you learned that HTTP has built-in facilities to help scale the performance of our distributed systems. HTTP caching is a rich protocol that gives us a lot of control over browser, proxy, and client caches. It helps tremendously in reducing network traffic and speeding up response times for applications. Besides caching, distributed systems also have the problem of multiple clients trying to update the same resource. The HTTP protocol again comes to the rescue with well-defined semantics for handling concurrent updates. For both caching and concurrent updates, JAX-RS provides some helper classes to make it easier to enable these features in your Java applications. [Chapter 25](../../part2/chapter25/examples_for_chapter_11.md) contains some code you can use to test-drive many of the concepts in this chapter.

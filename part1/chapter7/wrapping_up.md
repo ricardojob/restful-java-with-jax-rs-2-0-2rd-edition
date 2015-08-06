@@ -1,4 +1,0 @@
-# Wrapping Up
-
-
-In this chapter, you learned that JAX-RS has default response codes for both success and error conditions. For more complex responses, your JAX-RS resource methods can return **javax.ws.rs.core.Response** objects. JAX-RS has a few exception utilities. You can throw instances of **javax.ws.rs.WebApplicationException** or let the underlying servlet container handle the exception. Or, you can write an **ExceptionMapper** that can map a particular exception to an HTTP response. [Chapter 22](../../part2/chapter22/examples_for_chapter_7.md) walks you through some sample code that you can use to test-drive many of the concepts and APIs introduced in this chapter.

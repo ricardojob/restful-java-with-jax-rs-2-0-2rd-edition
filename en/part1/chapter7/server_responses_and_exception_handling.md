@@ -1,0 +1,4 @@
+# Chapter 7. Server Responses and Exception Handling
+
+
+So far, the examples given in this book have been very clean and tidy. The JAX-RS resource methods we have written have looked like regular vanilla Java methods with JAX-RS annotations. We haven’t talked a lot about the default behavior of JAX-RS resource methods, particularly around HTTP response codes in success and failure scenarios. Also, in the real world, you can’t always have things so neat and clean. Many times you need to send specific response headers to deal with complex error conditions. This chapter first discusses the default response codes that vanilla JAX-RS resource methods give. It then walks you through writing complex responses using JAX-RS APIs. Finally, it goes over how exceptions can be handled within JAX-RS.
